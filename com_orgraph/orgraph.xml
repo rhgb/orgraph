@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+	
+	<name>orgraph</name>
+	<creationDate>September 2012</creationDate>
+	<author>Shanghai GM</author>
+	<authorEmail>admin@localhost</authorEmail>
+	<authorUrl>localhost</authorUrl>
+	<copyright>Mengzhe Wang</copyright>
+	<license>CC-BY-SA 3.0</license>
+	<version>0.0.6</version>
+	<description>Organization Graph.</description>
+	
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>orgraph.php</filename>
+		<filename>controller.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+	</files>
+	
+	<administration>
+		<menu>Org Graph</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>orgraph.php</filename>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>models</folder>
+		</files>
+	</administration>
+
+</extension>
