@@ -8,10 +8,13 @@ class OrgraphTableDept extends JTable
 		parent::__construct('#__orgraph_dept', 'id', $db);
 	}
 	public function loadAll() {
-		$db=&($this->_db);
+		$db=&$this->_db;
 		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_dept').";";
 		$db->setQuery($query);
-		return $db->loadRowList();
+		foreach($db->loadRowList() as $d){
+			$list[$d[0]]=$d;
+		}
+		return $list;
 	}
 }
 ?>

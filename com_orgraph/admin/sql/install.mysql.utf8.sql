@@ -5,8 +5,8 @@
 -- organization_graph table(s) definition
 --
 --
-drop table if exists `#__orgraph_dept`;
 drop table if exists `#__orgraph_user`;
+drop table if exists `#__orgraph_dept`;
 create table `#__orgraph_dept` (
 	id int auto_increment primary key,
 	name varchar(255) not null,
@@ -27,3 +27,12 @@ create table `#__orgraph_user` (
 		references #__users(id)
 		on update cascade on delete cascade
 	) engine=innodb;
+	
+-- generate example data
+insert into `#__orgraph_dept` (name,description,parent_id) values
+	('headquater','The headquater of ptme',null),
+	('hr','Human resources',1),
+	('finance','Finance dept',1),
+	('tech','Technical dept',1),
+	('EE','EE section',4),
+	('Mech','Mechanical section',4);

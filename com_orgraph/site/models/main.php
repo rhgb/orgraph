@@ -4,6 +4,7 @@ jimport('joomla.application.component.modelitem');
 class OrgraphModelMain extends JModelItem
 {
 	protected $msg;
+	protected $deptTree;
 	public function getTable($type=null, $prefix='orgraphTable', $config='')
 	{
 		if(is_null($type)) return null;
@@ -11,9 +12,30 @@ class OrgraphModelMain extends JModelItem
 	}
 	public function getDeptTree()
 	{
-		$this->deptTree = array();
 		$deptTable = $this->getTable('dept');
-		$this->deptTree = $deptTable->loadAll();
+		$deptList = $deptTable->loadAll();
+		foreach($deptList as $i=>$d){
+			if(is_null($d[3])){
+				$rootList[]=$i;
+			}
+			else {
+				$deptList[$d[3]][4][]=$d[0];
+			}
+		}
+		function buildTree(&$list,&$d){
+			$dept=array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
+			if(array_key_exists(4, $d)){
+				foreach($d[4] as $i){
+					$dept['children'][]=buildTree($list,$list[$i]);
+				}
+			}
+			return $dept;
+		}
+		foreach($rootList as $rid){
+			$this->deptTree[]=buildTree($deptList, $deptList[$rid]);
+		}
+		$this->deptTree['root']=$rootList;
+		$this->deptTree['tree']=$deptList;
 		return $this->deptTree;
 	}
 	public function getMsg($id = 1)
@@ -21,7 +43,6 @@ class OrgraphModelMain extends JModelItem
 		if(!is_array($this->msg)) {
 			$this->msg = array();
 		}
-
 		if(!isset($this->msg[$id]))
 		{
 			$input = JFactory::getApplication()->input;

@@ -1,4 +1,9 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
  ?>
-<h1><?php echo $this->tree; ?></h1>
+<script type="text/javascript">
+var deptTree=<?php echo json_encode($this->tree);?>;
+console.debug(deptTree);
+</script>
+<div>
+</div>
