@@ -1,4 +1,5 @@
 .DS_Store
-.buildpath
-.project
-.settings
+/.buildpath
+/.project
+/.settings
+/com_orgraph.zip
