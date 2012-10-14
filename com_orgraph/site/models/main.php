@@ -34,8 +34,6 @@ class OrgraphModelMain extends JModelItem
 		foreach($rootList as $rid){
 			$this->deptTree[]=buildTree($deptList, $deptList[$rid]);
 		}
-		$this->deptTree['root']=$rootList;
-		$this->deptTree['tree']=$deptList;
 		return $this->deptTree;
 	}
 	public function getMsg($id = 1)

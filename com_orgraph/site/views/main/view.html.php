@@ -14,4 +14,4 @@ class OrgraphViewMain extends JView
 		parent::display($tpl);
 	}
 }
- ?>
+?>
