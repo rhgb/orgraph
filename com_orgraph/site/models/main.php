@@ -5,13 +5,13 @@ class OrgraphModelMain extends JModelItem
 {
 	protected $msg;
 	protected $deptTree;
-	public function getTable($type=null, $prefix='orgraphTable', $config='')
-	{
+	
+	public function getTable($type=null, $prefix='orgraphTable', $config='') {
 		if(is_null($type)) return null;
 		return JTable::getInstance($type,$prefix,$config);
 	}
-	public function getDeptTree()
-	{
+	
+	public function getDeptTree() {
 		$deptTable = $this->getTable('dept');
 		$deptList = $deptTable->loadAll();
 		foreach($deptList as $i=>$d){
@@ -36,6 +36,12 @@ class OrgraphModelMain extends JModelItem
 		}
 		return $this->deptTree;
 	}
+	
+	public function getDeptUsers($deptId=null) {
+		$userTable = $this->getTable('user');
+		$userList = $userTable->loadDeptUsers($deptId);
+	}
+	/*
 	public function getMsg($id = 1)
 	{
 		if(!is_array($this->msg)) {
@@ -51,5 +57,6 @@ class OrgraphModelMain extends JModelItem
 		}
 		return $this->msg[$id];
 	}
+	*/
 }
 ?>

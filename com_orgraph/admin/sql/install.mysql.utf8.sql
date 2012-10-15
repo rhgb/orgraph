@@ -36,3 +36,5 @@ insert into `#__orgraph_dept` (name,description,parent_id) values
 	('tech','Technical dept',1),
 	('EE','EE section',4),
 	('Mech','Mechanical section',4);
+-- insert into `#__orgraph_user` (position,dept_id,user_id) values
+	
