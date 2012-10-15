@@ -6,6 +6,7 @@ class OrgraphViewMain extends JView
 	function display($tpl = null)
 	{
 		$this->tree = $this->get('DeptTree');
+		$this->deptusers = $this->get('DeptUsers');
 		if(count($errors = $this->get('Errors')))
 		{
 			JError::raiseError(500, implode('<br />', $errors));
