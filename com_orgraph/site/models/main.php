@@ -32,9 +32,9 @@ class OrgraphModelMain extends JModelItem
 			return $dept;
 		}
 		foreach($rootList as $rid){
-			$this->deptTree[]=buildTree($deptList, $deptList[$rid]);
+			$deptTree[]=buildTree($deptList, $deptList[$rid]);
 		}
-		return $this->deptTree;
+		return $deptTree;
 	}
 	
 	public function getDeptUsers($deptId=null) {
