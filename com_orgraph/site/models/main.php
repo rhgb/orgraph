@@ -40,6 +40,7 @@ class OrgraphModelMain extends JModelItem
 	public function getDeptUsers($deptId=null) {
 		$userTable = $this->getTable('user');
 		$userList = $userTable->loadDeptUsers($deptId);
+		return $userList;
 	}
 	/*
 	public function getMsg($id = 1)
