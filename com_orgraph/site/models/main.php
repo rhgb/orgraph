@@ -1,18 +1,20 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
+//assert(jimport('joomla.database.table.user'));
+include_once(__DIR__.'../../../../libraries/joomla/database/table/user.php');
 jimport('joomla.application.component.modelitem');
 class OrgraphModelMain extends JModelItem
 {
 	protected $msg;
 	protected $deptTree;
 	
-	public function getTable($type=null, $prefix='orgraphTable', $config='') {
+	public function getDeptTable($type=null, $prefix='orgraphTable', $config='') {
 		if(is_null($type)) return null;
 		return JTable::getInstance($type,$prefix,$config);
 	}
 	
 	public function getDeptTree() {
-		$deptTable = $this->getTable('dept');
+		$deptTable = $this->getDeptTable('dept');
 		$deptList = $deptTable->loadAll();
 		foreach($deptList as $i=>$d){
 			if(is_null($d[3])){
@@ -38,26 +40,14 @@ class OrgraphModelMain extends JModelItem
 	}
 	
 	public function getDeptUsers($deptId=null) {
-		$userTable = $this->getTable('user');
+		$userTable = $this->getDeptTable('user');
 		$userList = $userTable->loadDeptUsers($deptId);
+		foreach($userList as &$user){
+			$j_user = & JFactory::getUser((int)$user[0]);
+			assert($j_user->id > 0);
+			$user = array('id'=>(int)$user[0],'position'=>$user[1],'name'=>$j_user->name);
+		}
 		return $userList;
 	}
-	/*
-	public function getMsg($id = 1)
-	{
-		if(!is_array($this->msg)) {
-			$this->msg = array();
-		}
-		if(!isset($this->msg[$id]))
-		{
-			$input = JFactory::getApplication()->input;
-			$id = $input->getInt('id');
-			$table = $this->getTable();
-			$table->load($id);
-			$this->msg[$id] = $table->greeting;
-		}
-		return $this->msg[$id];
-	}
-	*/
 }
 ?>

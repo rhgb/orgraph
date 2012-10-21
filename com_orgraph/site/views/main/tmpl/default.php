@@ -28,6 +28,7 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 			for(var i=0;i<deptTree.length;i++){
 				createTree(deptTree[i],$("#orgraph_deptTree"));
 			}
+			$("#orgraph_deptUsers").css("min-height",$("#orgraph_deptTree").height());
 		});
 		$("#orgraph_deptTree").on("click",".dept-tree-node>.node-detail>.name",function(e){
 			var $node=$(this).parent().parent();
@@ -38,6 +39,13 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 				dept_id:did
 			},function(users){
 				console.debug(users);
+				$("#orgraph_deptUsers").empty();
+				for(var i=0; i<users.length; i++){
+					var $usernode=$('<div class="dept-user-node"><div class="name"></div><div class="position"></div></div>');
+					$usernode.children(".name").text(users[i].name);
+					$usernode.children(".position").text(users[i].position);
+					$("#orgraph_deptUsers").append($usernode);
+				}
 			});
 		});
 	});
