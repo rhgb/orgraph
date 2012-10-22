@@ -4,7 +4,7 @@
 }
 #orgraph_deptTree .dept-tree-node {
 	float: left;
-	padding: 5px;
+	padding: 0 5px;
 }
 #orgraph_deptTree .node-detail {
 	margin: 0 auto;
@@ -22,6 +22,16 @@
 .node-detail .desc {
 	padding: 5px;
 }
+#orgraph_deptTree .tree-connect {
+	border-bottom: 1px solid black;
+	padding: 0 5px;
+}
+#orgraph_deptTree .tree-connect-hr {
+	width: 1px;
+	height: 10px;
+	margin: 0 auto;
+	background-color: black;
+}
 #orgraph_deptUsers {
 	overflow: hidden;
 	border-left: 1px solid #CCC;
@@ -36,6 +46,7 @@
 	font-size: larger;
 	font-weight: bold;
 	text-align: center;
+	margin-bottom: 5px;
 }
 .dept-user-node .position {
 	text-align: center;

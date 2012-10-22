@@ -13,7 +13,7 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 				console.debug("Error retrieving dept tree");
 				return false;
 			}
-			function createTree(dept,$tree){
+			function createTree(dept,$tree){	// recursively generate dept tree
 				var $node=$('<div class="dept-tree-node"><div class="node-detail"><div class="name"></div><div class="desc"></div></div><div class="children"></div></div>');
 				$node.find('.name').text(dept.name);
 				$node.find('.desc').text(dept.desc);
@@ -28,6 +28,18 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 			for(var i=0;i<deptTree.length;i++){
 				createTree(deptTree[i],$("#orgraph_deptTree"));
 			}
+			$("#orgraph_deptTree .children:has(div)").each(function(){
+				var $con=$('<div class="tree-connect-hr"></div><div class="tree-connect"></div>');
+				var $chfirst=$(this).children().first();
+				var $chlast=$(this).children().last();
+				var chpadding=Number($chfirst.css("padding-left").match(/\d+/));
+				$con.filter(".tree-connect").css("margin-left",$chfirst.width()/2+chpadding);
+				$con.filter(".tree-connect").css("margin-right",$chlast.width()/2+chpadding-1);
+				$(this).children(".dept-tree-node").each(function(){
+					$(this).prepend('<div class="tree-connect-hr"></div>');
+				});
+				$(this).prepend($con);
+			});
 			$("#orgraph_deptUsers").css("min-height",$("#orgraph_deptTree").height());
 		});
 		$("#orgraph_deptTree").on("click",".dept-tree-node>.node-detail>.name",function(e){
@@ -38,7 +50,6 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 				task:"listDeptUsers",
 				dept_id:did
 			},function(users){
-				console.debug(users);
 				$("#orgraph_deptUsers").empty();
 				for(var i=0; i<users.length; i++){
 					var $usernode=$('<div class="dept-user-node"><div class="name"></div><div class="position"></div></div>');
