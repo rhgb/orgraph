@@ -24,4 +24,4 @@ class OrgraphController extends JController
 		$app->close();
 	}
 }
- ?>
+?>
