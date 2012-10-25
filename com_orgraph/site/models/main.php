@@ -43,9 +43,7 @@ class OrgraphModelMain extends JModelItem
 		$userTable = $this->getDeptTable('user');
 		$userList = $userTable->loadDeptUsers($deptId);
 		foreach($userList as &$user){
-			$j_user = & JFactory::getUser((int)$user[0]);
-			assert($j_user->id > 0);
-			$user = array('id'=>(int)$user[0],'position'=>$user[1],'name'=>$j_user->name);
+			$user = array('id'=>(int)$user[0],'name'=>$user[1],'dept_id'=>(int)$user[2],'position'=>$user[3]);
 		}
 		return $userList;
 	}

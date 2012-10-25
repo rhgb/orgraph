@@ -14,6 +14,9 @@ class OrgraphViewOrgraph extends JView
 	}
 	function _setToolbar(){
 		JToolBarHelper::title( JText::_( 'Orgraph: Control Panel' ));
+		JToolBarHelper::addNew('orgraph.add');
+		JToolBarHelper::editList('orgraph.edit');
+		JToolBarHelper::deleteList('orgraph.delete');
 	}
 }
 ?>

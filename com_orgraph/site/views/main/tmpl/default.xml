@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-	<layout title="COM_ORGRAPH_ORGRAPH_VIEW_DEFAULT_TITLE">
+	<layout title="Orgraph Main View">
 		<message>
-			COM_ORGRAPH_ORGRAPH_VIEW_DEFAULT_DESC
+			This view displays department tree and users of departments.
 		</message>
 	</layout>
 </metadata>

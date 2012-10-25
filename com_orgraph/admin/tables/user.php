@@ -10,9 +10,9 @@ class OrgraphTableUser extends JTable
 	public function loadDeptUsers($deptId=null) {
 		$db=&$this->_db;
 		if(is_null($deptId)) {
-			$query="SELECT user_id,dept_id,position FROM ".$db->nameQuote('#__orgraph_user')." ORDER BY ".$db->nameQuote('dept_id')." ASC;";
+			$query="SELECT b.id,b.name,a.dept_id,a.position FROM ".$db->nameQuote('#__orgraph_user')." AS a LEFT JOIN ".$db->nameQuote('#__users')." AS b ON a.user_id=b.id ORDER BY a.dept_id ASC;";
 		} else {
-			$query="SELECT user_id,position FROM ".$db->nameQuote('#__orgraph_user')." WHERE ".$db->nameQuote('dept_id')."=".$db->quote($deptId)." ORDER BY ".$db->nameQuote('user_id')." ASC;";
+			$query="SELECT b.id,b.name,a.dept_id,a.position FROM ".$db->nameQuote('#__orgraph_user')." AS a LEFT JOIN ".$db->nameQuote('#__users')." AS b ON a.user_id=b.id WHERE a.dept_id=".$db->quote($deptId)." ORDER BY a.user_id ASC;";
 		}
 		$db->setQuery($query);
 		return $db->loadRowList();

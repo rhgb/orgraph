@@ -1,7 +1,7 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
-class OrgraphViewDepts extends JView
+class OrgraphViewDept extends JView
 {
 	function display($tpl = null) {
 		if(count($errors = $this->get('Errors')))
