@@ -16,5 +16,14 @@ class OrgraphTableDept extends JTable
 		}
 		return $list;
 	}
+	public function loadDeptList() {
+		$db=&$this->_db;
+		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_dept')." AS a LEFT JOIN ".$db->nameQuote('#__orgraph_dept')." AS p ON a.parent_id=p.id;";
+		$db->setQuery($query);
+		$mapfunc = function($i){
+			return array('id' => $i[0], 'name' => $i[1], 'description' => $i[2], 'parent_id' => $i[3], 'parent_name' => $i[4]);
+		};
+		return array_map($mapfunc, $db->loadRowList());
+	}
 }
 ?>

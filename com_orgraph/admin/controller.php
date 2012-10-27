@@ -4,9 +4,10 @@ jimport('joomla.application.component.controller');
 
 class OrgraphController extends JController
 {
-	function display() 
+	function display($cachable = false) 
 	{
-		parent::display();
+		JRequest::setVar('view', JRequest::getCmd('view', 'Depts'));
+		parent::display($cachable);
 	}
 }
 ?>

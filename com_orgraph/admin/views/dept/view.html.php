@@ -4,6 +4,8 @@ jimport('joomla.application.component.view');
 class OrgraphViewDept extends JView
 {
 	function display($tpl = null) {
+		$this->dept = $this->get('Item');
+		$this->form = $this->get('Form');
 		if(count($errors = $this->get('Errors')))
 		{
 			JError::raiseError(500, implode('<br />', $errors));
@@ -13,7 +15,12 @@ class OrgraphViewDept extends JView
 		$this->_setToolbar();
 	}
 	function _setToolbar(){
-		JToolBarHelper::title( JText::_( 'Orgraph: Departments' ));
+		$input = JFactory::getApplication()->input;
+		$input->set('hidemainmenu', true);
+		$isNew = ($this->dept->id == 0);
+		JToolBarHelper::title($isNew ? JText::_( 'Orgraph: New Department' ) : JText::_('Orgraph: Edit Department'));
+		JToolBarHelper::save('dept.save');
+		JToolBarHelper::cancel('dept.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}
 }
 ?>

@@ -1,23 +1,17 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
-//assert(jimport('joomla.database.table.user'));
-include_once(__DIR__.'../../../../libraries/joomla/database/table/user.php');
 jimport('joomla.application.component.modelitem');
 class OrgraphModelMain extends JModelItem
 {
-	protected $msg;
-	protected $deptTree;
-	
-	public function getDeptTable($type=null, $prefix='orgraphTable', $config='') {
-		if(is_null($type)) return null;
+	public function getTable($type='Dept', $prefix='orgraphTable', $config='') {
 		return JTable::getInstance($type,$prefix,$config);
 	}
 	
 	public function getDeptTree() {
-		$deptTable = $this->getDeptTable('dept');
+		$deptTable = $this->getTable();
 		$deptList = $deptTable->loadAll();
 		foreach($deptList as $i=>$d){
-			if(is_null($d[3])){
+			if(is_null($d[3]) || $d[3]==0){
 				$rootList[]=$i;
 			}
 			else {

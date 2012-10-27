@@ -45,6 +45,8 @@
 			<folder>sql</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
+			<folder>models</folder>
+			<folder>controllers</folder>
 		</files>
 	</administration>
 
