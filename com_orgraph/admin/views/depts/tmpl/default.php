@@ -26,22 +26,22 @@ JHTML::_('behavior.tooltip');
 		<tbody>
 		<?php 
 		foreach ($this->depts as $i => $dept) {
-			$link=JRoute::_('index.php?option=com_orgraph&task=dept.edit&id='.$dept['id']);
+			$link=JRoute::_('index.php?option=com_orgraph&task=dept.edit&id='.$dept->id);
 		?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
-					<?php echo JHtml::_('grid.id', $i, $dept['id']); ?>
+					<?php echo JHtml::_('grid.id', $i, $dept->id); ?>
 				</td>
 				<td>
-					<a href="<?php echo $link; ?>"><?php echo $dept['name']; ?></a>
+					<a href="<?php echo $link; ?>"><?php echo $dept->name; ?></a>
 				</td>
 				<td>
-					<?php echo $dept['description']; ?>
+					<?php echo $dept->description; ?>
 				</td>
 				<td class="center">
-					<?php echo $dept['parent_name']; ?>
+					<?php echo $dept->parent_name; ?>
 				</td>
-				<td class="center"><?php echo $dept['id']; ?></td>
+				<td class="center"><?php echo $dept->id; ?></td>
 			</tr>
 		<?php } ?>
 		</tbody>

@@ -34,12 +34,8 @@ class OrgraphModelMain extends JModelItem
 	}
 	
 	public function getDeptUsers($deptId=null) {
-		$userTable = $this->getDeptTable('user');
-		$userList = $userTable->loadDeptUsers($deptId);
-		foreach($userList as &$user){
-			$user = array('id'=>(int)$user[0],'name'=>$user[1],'dept_id'=>(int)$user[2],'position'=>$user[3]);
-		}
-		return $userList;
+		$userTable = $this->getTable('DeptUser');
+		return $userTable->loadDeptUsers($deptId);
 	}
 }
 ?>

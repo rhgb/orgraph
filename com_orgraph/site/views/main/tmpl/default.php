@@ -13,6 +13,7 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 				console.debug("Error retrieving dept tree");
 				return false;
 			}
+
 			function createTree(dept,$tree){	// recursively generate dept tree
 				var $node=$('<div class="dept-tree-node"><div class="node-detail"><div class="name"></div><div class="desc"></div></div><div class="children"></div></div>');
 				$node.find('.name').text(dept.name);
@@ -25,9 +26,11 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 					}
 				}
 			}
+
 			for(var i=0;i<deptTree.length;i++){
 				createTree(deptTree[i],$("#orgraph_deptTree"));
 			}
+
 			$("#orgraph_deptTree .children:has(div)").each(function(){
 				var $con=$('<div class="tree-connect-hr"></div><div class="tree-connect"></div>');
 				var $chfirst=$(this).children().first();
@@ -42,6 +45,7 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 			});
 			$("#orgraph_deptUsers").css("min-height",$("#orgraph_deptTree").height());
 		});
+
 		$("#orgraph_deptTree").on("click",".dept-tree-node>.node-detail>.name",function(e){
 			var $node=$(this).parent().parent();
 			var did=$node.attr("id").match(/\d+/)[0];
