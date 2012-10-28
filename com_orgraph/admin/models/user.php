@@ -29,5 +29,29 @@ class OrgraphModelUser extends JModelAdmin {
 		}
 		return $data;
 	}
+	public function getDeptTreeList() {
+		$deptTable=$this->getTable('Dept');
+		$tree = $deptTable->loadDeptTree();
+		function expandTree($node, $level) {
+			$node->level=$level;
+			$chlist=$node->children;
+			unset($node->children);
+			$list=array($node);
+			if(!empty($chlist)){
+				foreach ($chlist as $d) {
+					$list = array_merge($list, expandTree($d, $level+1));
+				}
+			}
+			return $list;
+		}
+		$treelist=array();
+		foreach ($tree as $d) {
+			$treelist = array_merge($treelist, expandTree($d, 0));
+		}
+		return $treelist;
+	}
+	public function getCurrentDeptId() {
+		return $this->loadFormData()->dept_id;
+	}
 }
  ?>

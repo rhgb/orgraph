@@ -2,8 +2,8 @@
 <form>
 	<fieldset>
 		<field name="id" type="hidden"/>
-		<field name="user_id" type="hidden"/>
+		<field name="user_id" type="user" label="Name" />
 		<field name="position" type="text" label="Position" class="inputbox" default="" />
-		<field name="dept_id" type="hidden"/>
+		<field name="dept_id" type="hidden" />
 	</fieldset>
 </form>

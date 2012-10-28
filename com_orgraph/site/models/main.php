@@ -11,7 +11,7 @@ class OrgraphModelMain extends JModelItem
 		$deptTable = $this->getTable();
 		$deptList = $deptTable->loadAll();
 		foreach($deptList as $i=>$d){
-			if(is_null($d[3]) || $d[3]==0){
+			if(empty($d[3])){
 				$rootList[]=$i;
 			}
 			else {

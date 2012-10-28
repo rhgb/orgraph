@@ -6,13 +6,33 @@ JHtml::_('behavior.tooltip');
  	<fieldset class="adminform">
  		<legend><?php echo JText::_('Detail'); ?></legend>
  		<ul class="adminformlist">
+			<li><?php echo $this->form->getLabel('id');
+			echo $this->form->getInput('id'); ?></li>
+			<li><?php echo $this->form->getLabel('user_id');
+			echo $this->form->getInput('user_id'); ?></li>
+			<li><?php echo $this->form->getLabel('position');
+			echo $this->form->getInput('position'); ?></li>
  			<li>
- 				<label>Name</label>
- 				<input type="text" class="readonly" readonly="readonly" value="<?php echo JFactory::getUser($this->user->user_id)->name;?>" />
+ 				<label id="jform_dept_id-lbl" for="jform_dept_id" class="required">Department</label>
+ 				<select name="jform[dept_id]" id="jform_dept_id" class="inputbox required" aria-required="true" required="true">
+				<?php 
+					$treelist = $this->get('DeptTreeList');
+					$currdept = $this->get('CurrentDeptId');
+					foreach ($treelist as $d) :
+				?>
+					<option value="<?php echo $d->id ?>"<?php if($d->id == (int)$currdept) echo ' selected="selected"'; ?>>
+						<?php 
+						for ($i=0; $i<$d->level; $i++) {
+							echo '- ';
+						}
+						echo $d->name;
+						 ?>
+					</option>
+				<?php
+					endforeach;
+				 ?>
+ 				</select>
  			</li>
-		<?php foreach($this->form->getFieldset() as $field) { ?>
-			<li><?php echo $field->label; echo $field->input; ?></li>
-		<?php } ?>
  		</ul>
  	</fieldset>
  		<div>

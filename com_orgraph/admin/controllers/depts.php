@@ -7,7 +7,7 @@ jimport('joomla.application.component.controlleradmin');
 
 class OrgraphControllerDepts extends JControllerAdmin
 {
-        public function getModel($name = 'Depts', $prefix = 'OrgraphModel') 
+        public function getModel($name = 'Dept', $prefix = 'OrgraphModel') 
         {
                 $model = parent::getModel($name, $prefix, array('ignore_request' => true));
                 return $model;

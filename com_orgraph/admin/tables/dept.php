@@ -25,5 +25,29 @@ class OrgraphTableDept extends JTable
 		};
 		return array_map($mapfunc, $db->loadRowList());
 	}
+	public function loadDeptTree() {
+		$list=$this->loadAll();
+		foreach ($list as $i => $d) { // find root; assign children to $d[4]
+			if (empty($d[3])) {
+				$rootlist[]=$d[0];
+			}
+			else {
+				$list[$d[3]][4][]=$d[0];
+			}
+		}
+		function buildTree(&$list, &$d) { // build tree recursively
+			$dept=(object)array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
+			if(array_key_exists(4, $d) && !empty($d[4])){
+				foreach($d[4] as $i){
+					$dept->children[]=buildTree($list,$list[$i]);
+				}
+			}
+			return $dept;
+		}
+		foreach ($rootlist as $i) { // build tree
+			$treelist[]=buildTree($list, $list[$i]);
+		}
+		return $treelist;
+	}
 }
 ?>
