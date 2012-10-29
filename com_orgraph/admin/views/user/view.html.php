@@ -18,7 +18,7 @@ class OrgraphViewUser extends JView
 		$input = JFactory::getApplication()->input;
 		$input->set('hidemainmenu', true);
 		$isNew = ($this->user->id == 0);
-		JToolBarHelper::title($isNew ? JText::_( 'Orgraph: Add Member' ) : JText::_('Orgraph: Edit Member'));
+		JToolBarHelper::title($isNew ? JText::_( 'COM_ORGRAPH_USER_TITLE_NEW' ) : JText::_('COM_ORGRAPH_USER_TITLE_EDIT'));
 		JToolBarHelper::save('user.save');
 		JToolBarHelper::cancel('user.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}

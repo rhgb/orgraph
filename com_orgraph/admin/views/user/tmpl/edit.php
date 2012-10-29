@@ -4,7 +4,7 @@ JHtml::_('behavior.tooltip');
  ?>
  <form action="<?php echo JRoute::_('index.php?option=com_orgraph&layout=edit&id='.(int)$this->user->id); ?>" method="post" name="adminForm" id="orgraph-user-form">
  	<fieldset class="adminform">
- 		<legend><?php echo JText::_('Detail'); ?></legend>
+ 		<legend><?php echo JText::_('COM_ORGRAPH_USER_LEGEND_DETAIL'); ?></legend>
  		<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('id');
 			echo $this->form->getInput('id'); ?></li>
@@ -13,7 +13,10 @@ JHtml::_('behavior.tooltip');
 			<li><?php echo $this->form->getLabel('position');
 			echo $this->form->getInput('position'); ?></li>
  			<li>
- 				<label id="jform_dept_id-lbl" for="jform_dept_id" class="required">Department</label>
+ 				<label id="jform_dept_id-lbl" for="jform_dept_id" class="required">
+ 					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_DEPT'); ?>
+ 					<span class="star"> *</span>
+ 				</label>
  				<select name="jform[dept_id]" id="jform_dept_id" class="inputbox required" aria-required="true" required="true">
 				<?php 
 					$treelist = $this->get('DeptTreeList');

@@ -18,7 +18,7 @@ class OrgraphViewDepts extends JView
 		$this->_setToolbar();
 	}
 	function _setToolbar(){
-		JToolBarHelper::title( JText::_( 'Orgraph: Departments' ));
+		JToolBarHelper::title( JText::_( 'COM_ORGRAPH_DEPTS_TITLE' ));
 		JToolBarHelper::addNew('dept.add');
 		JToolBarHelper::deleteList('', 'depts.delete');
 	}

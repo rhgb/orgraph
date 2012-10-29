@@ -18,7 +18,7 @@ class OrgraphViewUsers extends JView
 		$this->_setToolbar();
 	}
 	function _setToolbar(){
-		JToolBarHelper::title( JText::_( 'Orgraph: Users' ));
+		JToolBarHelper::title( JText::_( 'COM_ORGRAPH_USERS_TITLE' ));
 		JToolBarHelper::addNew('user.add');
 		JToolBarHelper::deleteList('', 'users.delete');
 	}

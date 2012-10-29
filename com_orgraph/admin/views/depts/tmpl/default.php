@@ -10,16 +10,16 @@ JHTML::_('behavior.tooltip');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this);" />
 				</th>
 				<th class="left nowrap" width="10%">
-					<?php echo JHtml::_('grid.sort', 'Title', 'd.name', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_NAME') ?>
 				</th>
 				<th class="left nowrap" width="">
-					<?php echo JHtml::_('grid.sort', 'Description', 'd.description', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_DESC'); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHtml::_('grid.sort', 'Parent', 'p.name', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_PARENT'); ?>
 				</th>
 				<th class="nowrap" width="5%">
-					<?php echo JHtml::_('grid.sort', 'Id', 'd.id', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_ID'); ?>
 				</th>
 			</tr>
 		</thead>

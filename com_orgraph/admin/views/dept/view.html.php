@@ -18,7 +18,7 @@ class OrgraphViewDept extends JView
 		$input = JFactory::getApplication()->input;
 		$input->set('hidemainmenu', true);
 		$isNew = ($this->dept->id == 0);
-		JToolBarHelper::title($isNew ? JText::_( 'Orgraph: New Department' ) : JText::_('Orgraph: Edit Department'));
+		JToolBarHelper::title($isNew ? JText::_( 'COM_ORGRAPH_DEPT_TITLE_NEW' ) : JText::_('COM_ORGRAPH_DEPT_TITLE_EDIT'));
 		JToolBarHelper::save('dept.save');
 		JToolBarHelper::cancel('dept.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}

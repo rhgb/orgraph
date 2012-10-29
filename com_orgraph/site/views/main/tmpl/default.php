@@ -67,6 +67,7 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 })(jQuery);
 </script>
 <div class="container">
+	<h2><?php echo JText::_('COM_ORGRAPH_GRAPH'); ?></h2>
 	<div id="orgraph_deptTree"></div>
 	<div id="orgraph_deptUsers"></div>
 	<div style="clear:both"></div>

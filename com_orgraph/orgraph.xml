@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="component" version="2.5.0" method="upgrade">
 	
-	<name>orgraph</name>
+	<name>COM_ORGRAPH</name>
 	<creationDate>September 2012</creationDate>
-	<author>Shanghai GM</author>
+	<author>Mengzhe Wang</author>
 	<authorEmail>admin@localhost</authorEmail>
 	<authorUrl>localhost</authorUrl>
-	<copyright>Mengzhe Wang</copyright>
 	<license>CC-BY-SA 3.0</license>
-	<version>0.0.6</version>
+	<version>0.1.0</version>
 	<description>Organization Graph.</description>
 	
 	<install>
@@ -34,10 +33,15 @@
 		<folder>views</folder>
 		<folder>models</folder>
 		<folder>css</folder>
+		<folder>language</folder>
 	</files>
 	
 	<administration>
-		<menu>Org Graph</menu>
+		<menu>COM_ORGRAPH</menu>
+		<submenu>
+			<menu view="depts">COM_ORGRAPH_MANAGE_DEPARTMENTS</menu>
+			<menu view="users">COM_ORGRAPH_MANAGE_MEMBERS</menu>
+		</submenu>
 		<files folder="admin">
 			<filename>index.html</filename>
 			<filename>orgraph.php</filename>
@@ -47,7 +51,7 @@
 			<folder>views</folder>
 			<folder>models</folder>
 			<folder>controllers</folder>
+			<folder>language</folder>
 		</files>
 	</administration>
-
 </extension>
