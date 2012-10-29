@@ -47,7 +47,7 @@
 }
 #orgraph_deptUsers {
 	overflow: hidden;
-	border-left: 1px solid #CCC
+	border-left: 1px solid #CCC;
 	padding-left: 10px;
 }
 #orgraph_deptUsers>.dept-name {
