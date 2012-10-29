@@ -27,17 +27,3 @@ create table `#__orgraph_user` (
 		references #__users(id)
 		on update cascade on delete cascade
 	) engine=innodb;
-	
--- generate example data
-insert into `#__orgraph_dept` (name,description,parent_id) values
-	('headquater','The headquater of ptme',null),
-	('hr','Human resources',1),
-	('finance','Finance dept',1),
-	('tech','Technical dept',1),
-	('EE','EE section',4),
-	('Mech','Mechanical section',4);
-insert into `#__orgraph_user` (position,dept_id,user_id) values
-	('manager',1,48),
-	('engineer',4,42),
-	('engineer',4,44),
-	('assistant',5,45);
