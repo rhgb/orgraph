@@ -8,7 +8,7 @@
 	<authorUrl>localhost</authorUrl>
 	<license>CC-BY-SA 3.0</license>
 	<version>0.1.0</version>
-	<description>Organization Graph.</description>
+	<description>COM_ORGRAPH_DESC</description>
 	
 	<install>
 		<sql>

@@ -46,15 +46,26 @@ JHTML::stylesheet('style.css','components/com_orgraph/css/');
 			$("#orgraph_deptUsers").css("min-height",$("#orgraph_deptTree").height());
 		});
 
-		$("#orgraph_deptTree").on("click",".dept-tree-node>.node-detail>.name",function(e){
-			var $node=$(this).parent().parent();
+		$("#orgraph_deptTree").on("click",".dept-tree-node>.node-detail:not(.selected)",function(e){
+			// highlight selected
+			$(".node-detail.selected").removeClass("selected");
+			$detail=$(this);
+			$detail.addClass("selected");
+			// display basic info
+			$rpanel=$("#orgraph_deptUsers").empty();
+			$title=$('<h3 class="dept-name"></h3>');
+			$title.text($detail.find(".name").text());
+			$desc=$('<div class="dept-desc"></div>');
+			$desc.text($detail.find(".desc").text());
+			$rpanel.append($title).append($desc);
+			// get members
+			var $node=$(this).parent();
 			var did=$node.attr("id").match(/\d+/)[0];
 			$.getJSON('index.php',{
 				option:"com_orgraph",
 				task:"listDeptUsers",
 				dept_id:did
 			},function(users){
-				$("#orgraph_deptUsers").empty();
 				for(var i=0; i<users.length; i++){
 					var $usernode=$('<div class="dept-user-node"><div class="name"></div><div class="position"></div></div>');
 					$usernode.children(".name").text(users[i].name);
