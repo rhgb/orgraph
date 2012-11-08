@@ -18,7 +18,9 @@ class TableOrgraphDept extends JTable
 	}
 	public function loadDeptList() {
 		$db=&$this->_db;
-		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_dept')." AS a LEFT JOIN ".$db->nameQuote('#__orgraph_dept')." AS p ON a.parent_id=p.id;";
+		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_dept')
+			." AS a LEFT JOIN ".$db->nameQuote('#__orgraph_dept')
+			." AS p ON a.parent_id=p.id;";
 		$db->setQuery($query);
 		$mapfunc = function($i){
 			return (object)array('id' => $i[0], 'name' => $i[1], 'description' => $i[2], 'parent_id' => $i[3], 'parent_name' => $i[4]);

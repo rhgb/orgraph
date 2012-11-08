@@ -8,7 +8,7 @@ class OrgraphModelUsers extends JModelList {
 	}
 	public function getUserList(){
 		$userTable=$this->getTable();
-		return $userTable->loadDeptUsers();
+		return $userTable->loadUsers();
 	}
 }
  ?>

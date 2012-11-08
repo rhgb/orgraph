@@ -7,10 +7,12 @@ class TableOrgraphUser extends JTable
 	{
 		parent::__construct('#__orgraph_user', 'id', $db);
 	}
-	public function loadDeptUsers($deptId=null) {
+	public function loadUsers($deptId=null, $userId=null) {
 		$db=&$this->_db;
-		if(!empty($deptId)) {
+		if (!empty($deptId)) {
 			$filter=' WHERE a.dept_id='.$db->quote($deptId);
+		} else if (!empty($userId)) {
+			$filter=' WHERE a.user_id='.$db->quote($userId);
 		} else {
 			$filter='';
 		}

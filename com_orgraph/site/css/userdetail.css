@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+table.user-detail {
+	border: 0 none;
+	border-collapse: separate;
+}
+table.user-detail td {
+	border: 0 none;
+	padding: 3px 5px;
+}
+table.user-detail td:first-child {
+	color: #297ECC;
+	text-align: right;
+	border: 0 none;
+}
+table.user-detail td:last-child {
+	font-size: larger;
+	border: 0 none;
+	padding-left: 5px;
+}

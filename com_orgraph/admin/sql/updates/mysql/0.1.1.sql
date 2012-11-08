@@ -28,14 +28,11 @@ create table `#__orgraph_user` (
 	computer_id varchar(16) null,
 	location varchar(8) null,
 	birthday date null,
-	index (dept_id, user_id, supervisor_id),
+	index (dept_id, user_id),
 	foreign key (dept_id)
 		references #__orgraph_dept(id)
 		on update cascade on delete cascade,
 	foreign key (user_id)
 		references #__users(id)
-		on update cascade on delete cascade,
-	foreign key (supervisor_id)
-		references #__users(id)
-		on update cascade on delete set null
+		on update cascade on delete cascade
 	) engine=innodb;
