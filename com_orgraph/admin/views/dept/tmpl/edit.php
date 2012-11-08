@@ -24,7 +24,7 @@ JHtml::_('behavior.tooltip');
 					$currid = $this->get('CurrentId');
 					if(empty($currdept)) $currdept=0;
 				?>
-					<option value="0"<?php if($d->id == (int)$currdept) echo ' selected="selected"'; ?>>&lt;None&gt;</option>
+					<option value="0"<?php if(empty($currdept)) echo ' selected="selected"'; ?>>&lt;None&gt;</option>
 				<?php
 					foreach ($treelist as $d) :
 						if($d->id != (int)$currid) :

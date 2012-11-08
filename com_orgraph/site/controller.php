@@ -5,7 +5,7 @@ class OrgraphController extends JController
 {
 	function display($tpl=null){
 		$document = &JFactory::getDocument();
-		$document->addScript('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+		$document->addScript(JRoute::_('components/com_orgraph/js/jquery.min.js'));
 		parent::display($tpl);
 	}
 	function listDeptTree(){
