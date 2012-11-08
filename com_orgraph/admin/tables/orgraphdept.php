@@ -1,7 +1,7 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.database.table');
-class OrgraphTableDept extends JTable
+class TableOrgraphDept extends JTable
 {
 	function __construct(&$db)
 	{

@@ -10,16 +10,16 @@ JHTML::_('behavior.tooltip');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this);" />
 				</th>
 				<th class="left nowrap" width="10%">
-					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_NAME') ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_NAME') ?>
 				</th>
 				<th class="left nowrap" width="">
-					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_DESC'); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_DESC'); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_PARENT'); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_PARENT'); ?>
 				</th>
 				<th class="nowrap" width="5%">
-					<?php echo JText::_('COM_ORGRAPH_DEPTS_HEADING_ID'); ?>
+					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_ID'); ?>
 				</th>
 			</tr>
 		</thead>

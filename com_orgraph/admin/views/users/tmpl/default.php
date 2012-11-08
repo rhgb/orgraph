@@ -9,17 +9,35 @@ JHTML::_('behavior.tooltip');
 				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this);" />
 				</th>
-				<th class="left nowrap" width="10%">
-					<?php echo JText::_('COM_ORGRAPH_USERS_HEADING_NAME'); ?>
+				<th class="left nowrap">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_NAME'); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JText::_('COM_ORGRAPH_USERS_HEADING_POS'); ?>
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_POS'); ?>
 				</th>
-				<th class="left nowrap" width="">
-					<?php echo JText::_('COM_ORGRAPH_USERS_HEADING_DEPT'); ?>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_DEPT'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_SUPERVISOR'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_TEL'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_MOBILE'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_COMP_ID'); ?>
 				</th>
 				<th class="nowrap" width="5%">
-					<?php echo JText::_('COM_ORGRAPH_USERS_HEADING_ID'); ?>
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_LOCATION'); ?>
+				</th>
+				<th class="nowrap" width="10%">
+					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_BIRTHDAY'); ?>
 				</th>
 			</tr>
 		</thead>
@@ -41,7 +59,27 @@ JHTML::_('behavior.tooltip');
 				<td>
 					<?php echo $user->dept; ?>
 				</td>
-				<td class="center"><?php echo $user->record_id; ?></td>
+				<td class="center">
+					<?php echo $user->employee_no; ?>
+				</td>
+				<td class="center">
+					<?php echo $user->supervisor; ?>
+				</td>
+				<td>
+					<?php echo $user->tel; ?>
+				</td>
+				<td class="center">
+					<?php echo $user->mobile; ?>
+				</td>
+				<td class="center">
+					<?php echo $user->computer_id; ?>
+				</td>
+				<td class="center">
+					<?php echo $user->location; ?>
+				</td>
+				<td class="center">
+					<?php echo $user->birthday; ?>
+				</td>
 			</tr>
 		<?php } ?>
 		</tbody>

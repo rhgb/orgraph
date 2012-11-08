@@ -7,5 +7,10 @@
 		<field name="dept_id" type="hidden" />
 		<field name="employee_no" type="text" label="COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO" required="true" />
 		<field name="supervisor_id" type="user" label="COM_ORGRAPH_USER_LABEL_SUPERVISOR" />
+		<field name="tel" type="text" label="COM_ORGRAPH_USER_LABEL_TEL" />
+		<field name="mobile" type="text" label="COM_ORGRAPH_USER_LABEL_MOBILE" />
+		<field name="computer_id" type="text" label="COM_ORGRAPH_USER_LABEL_COMP_ID" />
+		<field name="location" type="text" label="COM_ORGRAPH_USER_LABEL_LOCATION" />
+		<field name="birthday" type="calendar" label="COM_ORGRAPH_USER_LABEL_BIRTHDAY" />
 	</fieldset>
 </form>

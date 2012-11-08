@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modeladmin');
 
 class OrgraphModelDept extends JModelAdmin {
-	public function getTable($type = 'Dept', $prefix = 'OrgraphTable', $config = array()) 
+	public function getTable($type = 'OrgraphDept', $prefix = 'Table', $config = array()) 
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}

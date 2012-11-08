@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modeladmin');
 
 class OrgraphModelUser extends JModelAdmin {
-	public function getTable($type = 'DeptUser', $prefix = 'OrgraphTable', $config = array()) 
+	public function getTable($type = 'OrgraphUser', $prefix = 'Table', $config = array()) 
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -30,7 +30,7 @@ class OrgraphModelUser extends JModelAdmin {
 		return $data;
 	}
 	public function getDeptTreeList() {
-		$deptTable=$this->getTable('Dept');
+		$deptTable=$this->getTable('OrgraphDept');
 		$tree = $deptTable->loadDeptTree();
 		function expandTree($node, $level) {
 			$node->level=$level;

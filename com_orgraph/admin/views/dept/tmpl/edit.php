@@ -6,12 +6,14 @@ JHtml::_('behavior.tooltip');
  	<fieldset class="adminform">
  		<legend><?php echo JText::_('COM_ORGRAPH_DEPT_LEGEND_DETAIL'); ?></legend>
  		<ul class="adminformlist">
-			<li><?php echo $this->form->getLabel('id');
-			echo $this->form->getInput('id'); ?></li>
-			<li><?php echo $this->form->getLabel('name');
-			echo $this->form->getInput('name'); ?></li>
-			<li><?php echo $this->form->getLabel('description');
-			echo $this->form->getInput('description'); ?></li>
+ 		<?php foreach($this->form->getFieldset() as $field): ?>
+ 			<li><?php
+	 			if($field->name != 'parent_id') {
+	 				echo $field->label;
+	 				echo $field->input;
+	 			}
+ 			?></li>
+ 		<?php endforeach; ?>
 			 <li>
  				<label id="jform_parent_id-lbl" for="jform_parent_id" class="required">
  					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_PARENT'); ?>
@@ -24,7 +26,7 @@ JHtml::_('behavior.tooltip');
 					$currid = $this->get('CurrentId');
 					if(empty($currdept)) $currdept=0;
 				?>
-					<option value="0"<?php if(empty($currdept)) echo ' selected="selected"'; ?>>&lt;None&gt;</option>
+					<option value="0"<?php if(empty($currdept)) echo ' selected="selected"'; ?>><?php echo JText::_('COM_ORGRAPH_PLACEHOLDER_NONE'); ?></option>
 				<?php
 					foreach ($treelist as $d) :
 						if($d->id != (int)$currid) :

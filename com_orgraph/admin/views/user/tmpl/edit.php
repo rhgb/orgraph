@@ -6,13 +6,15 @@ JHtml::_('behavior.tooltip');
  	<fieldset class="adminform">
  		<legend><?php echo JText::_('COM_ORGRAPH_USER_LEGEND_DETAIL'); ?></legend>
  		<ul class="adminformlist">
-			<li><?php echo $this->form->getLabel('id');
-			echo $this->form->getInput('id'); ?></li>
-			<li><?php echo $this->form->getLabel('user_id');
-			echo $this->form->getInput('user_id'); ?></li>
-			<li><?php echo $this->form->getLabel('position');
-			echo $this->form->getInput('position'); ?></li>
- 			<li>
+		<?php foreach($this->form->getFieldset() as $field): ?>
+ 			<li><?php
+	 			if($field->name != 'dept_id') {
+	 				echo $field->label;
+	 				echo $field->input;
+	 			}
+ 			?></li>
+ 		<?php endforeach; ?>
+ 		<li>
  				<label id="jform_dept_id-lbl" for="jform_dept_id" class="required">
  					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_DEPT'); ?>
  					<span class="star"> *</span>
