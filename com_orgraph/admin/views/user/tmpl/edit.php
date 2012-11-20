@@ -8,36 +8,10 @@ JHtml::_('behavior.tooltip');
  		<ul class="adminformlist">
 		<?php foreach($this->form->getFieldset() as $field): ?>
  			<li><?php
-	 			if($field->name != 'dept_id') {
-	 				echo $field->label;
-	 				echo $field->input;
-	 			}
+ 				echo $field->label;
+ 				echo $field->input;
  			?></li>
  		<?php endforeach; ?>
- 		<li>
- 				<label id="jform_dept_id-lbl" for="jform_dept_id" class="required">
- 					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_DEPT'); ?>
- 					<span class="star"> *</span>
- 				</label>
- 				<select name="jform[dept_id]" id="jform_dept_id" class="inputbox required" aria-required="true" required="true">
-				<?php 
-					$treelist = $this->get('DeptTreeList');
-					$currdept = $this->get('CurrentDeptId');
-					foreach ($treelist as $d) :
-				?>
-					<option value="<?php echo $d->id ?>"<?php if($d->id == (int)$currdept) echo ' selected="selected"'; ?>>
-						<?php 
-						for ($i=0; $i<$d->level; $i++) {
-							echo '- ';
-						}
-						echo $d->name;
-						 ?>
-					</option>
-				<?php
-					endforeach;
-				 ?>
- 				</select>
- 			</li>
  		</ul>
  	</fieldset>
  		<div>

@@ -7,15 +7,6 @@ class TableOrgraphDept extends JTable
 	{
 		parent::__construct('#__orgraph_dept', 'id', $db);
 	}
-	public function loadAll() {
-		$db=&$this->_db;
-		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_dept').";";
-		$db->setQuery($query);
-		foreach($db->loadRowList() as $d){
-			$list[$d[0]]=$d;
-		}
-		return $list;
-	}
 	public function loadDeptList() {
 		$db=&$this->_db;
 		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_dept')
@@ -27,9 +18,25 @@ class TableOrgraphDept extends JTable
 		};
 		return array_map($mapfunc, $db->loadRowList());
 	}
+
+	protected function buildTree(&$list, &$d) { // build tree recursively
+		$dept=(object)array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
+		if(array_key_exists(4, $d) && !empty($d[4])){
+			foreach($d[4] as $i){
+				$dept->children[] = $this->buildTree($list,$list[$i]);
+			}
+		}
+		return $dept;
+	}
+
 	public function loadDeptTree() {
-		$list=$this->loadAll();
-		foreach ($list as $i => $d) { // find root; assign children to $d[4]
+		$db=&$this->_db;
+		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_dept').";";
+		$db->setQuery($query);
+		foreach($db->loadRowList() as $d){
+			$list[$d[0]]=$d;
+		}
+		foreach ($list as $d) { // find root; assign children to $d[4]
 			if (empty($d[3])) {
 				$rootlist[]=$d[0];
 			}
@@ -37,17 +44,8 @@ class TableOrgraphDept extends JTable
 				$list[$d[3]][4][]=$d[0];
 			}
 		}
-		function buildTree(&$list, &$d) { // build tree recursively
-			$dept=(object)array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
-			if(array_key_exists(4, $d) && !empty($d[4])){
-				foreach($d[4] as $i){
-					$dept->children[]=buildTree($list,$list[$i]);
-				}
-			}
-			return $dept;
-		}
 		foreach ($rootlist as $i) { // build tree
-			$treelist[]=buildTree($list, $list[$i]);
+			$treelist[] = $this->buildTree($list, $list[$i]);
 		}
 		return $treelist;
 	}

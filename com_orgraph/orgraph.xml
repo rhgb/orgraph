@@ -7,7 +7,7 @@
 	<authorEmail>admin@localhost</authorEmail>
 	<authorUrl>localhost</authorUrl>
 	<license>CC-BY-SA 3.0</license>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<description>COM_ORGRAPH_DESC</description>
 	
 	<install>
@@ -41,6 +41,7 @@
 		<menu>COM_ORGRAPH</menu>
 		<submenu>
 			<menu view="depts">COM_ORGRAPH_MANAGE_DEPARTMENTS</menu>
+			<menu view="projs">COM_ORGRAPH_MANAGE_PROJECTS</menu>
 			<menu view="users">COM_ORGRAPH_MANAGE_MEMBERS</menu>
 		</submenu>
 		<files folder="admin">
