@@ -3,11 +3,11 @@ defined('JPATH_BASE') or die;
 
 JFormHelper::loadFieldClass('list');
 
-class JFormFieldDeptParentList extends JFormFieldList
+class JFormFieldProjParentList extends JFormFieldList
 {
-	protected $type = 'deptparentlist';
+	protected $type = 'projparentlist';
 
-	public function getTable($type = 'OrgraphDept', $prefix = 'Table', $config = array()) 
+	public function getTable($type = 'OrgraphProj', $prefix = 'Table', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -27,10 +27,9 @@ class JFormFieldDeptParentList extends JFormFieldList
 		return $list;
 	}
 
-	protected function getDeptTreeList() {
-		$deptTable = $this->getTable();
-		$tree = $deptTable->loadDeptTree();
-
+	protected function getProjTreeList() {
+		$projTable = $this->getTable();
+		$tree = $projTable->loadProjTree();
 		$treelist=array( (object)array('id'=>0, 'name'=>JText::_('COM_ORGRAPH_PLACEHOLDER_NONE')) );
 		foreach ($tree as $d) {
 			if($this->currentId != $d->id) {
@@ -39,11 +38,11 @@ class JFormFieldDeptParentList extends JFormFieldList
 		}
 		return $treelist;
 	}
-	
+
 	protected function getOptions(){
 		$this->currentId = $this->form->getValue('id');
 		$options = array();
-		$treelist = $this->getDeptTreeList();
+		$treelist = $this->getProjTreeList();
 		foreach ($treelist as $d) {
 			$value = '';
 			for ($i=0; $i<$d->level; $i++) {

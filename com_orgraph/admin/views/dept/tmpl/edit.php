@@ -12,39 +12,6 @@ JHtml::_('behavior.tooltip');
  				echo $field->input;
  			?></li>
  		<?php endforeach; ?>
- 		<?php /*
-			 <li>
- 				<label id="jform_parent_id-lbl" for="jform_parent_id" class="required">
- 					<?php echo JText::_('COM_ORGRAPH_DEPT_LABEL_PARENT'); ?>
- 					<span class="star"> *</span>
- 				</label>
- 				<select name="jform[parent_id]" id="jform_parent_id" class="inputbox required" aria-required="true" required="true">
-				<?php 
-					$treelist = $this->get('DeptTreeList');
-					$currdept = $this->get('CurrentParentId');
-					$currid = $this->get('CurrentId');
-					if(empty($currdept)) $currdept=0;
-				?>
-					<option value="0"<?php if(empty($currdept)) echo ' selected="selected"'; ?>><?php echo JText::_('COM_ORGRAPH_PLACEHOLDER_NONE'); ?></option>
-				<?php
-					foreach ($treelist as $d) :
-						if($d->id != (int)$currid) :
-				?>
-					<option value="<?php echo $d->id ?>"<?php if($d->id == (int)$currdept) echo ' selected="selected"'; ?>>
-						<?php 
-						for ($i=0; $i<$d->level; $i++) {
-							echo '- ';
-						}
-						echo $d->name;
-						 ?>
-					</option>
-				<?php
-						endif;
-					endforeach;
-				 ?>
- 				</select>
- 			</li>
- 		*/ ?>
  		</ul>
  	</fieldset>
  		<div>

@@ -8,7 +8,7 @@ class TableOrgraphProj extends JTable
 		parent::__construct('#__orgraph_proj', 'id', $db);
 	}
 	public function loadProjList() {
-		$db=&$this->_db;
+		$db = & JFactory::getDBO();
 		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_proj')
 			." AS a LEFT JOIN ".$db->nameQuote('#__orgraph_proj')
 			." AS p ON a.parent_id=p.id;";
@@ -18,8 +18,19 @@ class TableOrgraphProj extends JTable
 		};
 		return array_map($mapfunc, $db->loadRowList());
 	}
+
+	protected function buildTree(&$list, &$d) { // build tree recursively
+		$proj=(object)array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
+		if(array_key_exists(4, $d) && !empty($d[4])){
+			foreach($d[4] as $i){
+				$proj->children[]=$this->buildTree($list,$list[$i]);
+			}
+		}
+		return $proj;
+	}
+
 	public function loadProjTree() {
-		$db=&$this->_db;
+		$db = & JFactory::getDBO();
 		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_proj').";";
 		$db->setQuery($query);
 		foreach($db->loadRowList() as $d){
@@ -33,17 +44,8 @@ class TableOrgraphProj extends JTable
 				$list[$d[3]][4][]=$d[0];
 			}
 		}
-		function buildTree(&$list, &$d) { // build tree recursively
-			$proj=(object)array('id'=>$d[0], 'name'=>$d[1], 'desc'=>$d[2], 'parentId'=>$d[3], 'children'=>array());
-			if(array_key_exists(4, $d) && !empty($d[4])){
-				foreach($d[4] as $i){
-					$proj->children[]=buildTree($list,$list[$i]);
-				}
-			}
-			return $proj;
-		}
 		foreach ($rootlist as $i) { // build tree
-			$treelist[]=buildTree($list, $list[$i]);
+			$treelist[]=$this->buildTree($list, $list[$i]);
 		}
 		return $treelist;
 	}

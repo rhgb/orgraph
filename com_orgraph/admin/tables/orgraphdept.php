@@ -8,7 +8,7 @@ class TableOrgraphDept extends JTable
 		parent::__construct('#__orgraph_dept', 'id', $db);
 	}
 	public function loadDeptList() {
-		$db=&$this->_db;
+		$db = & JFactory::getDBO();
 		$query="SELECT a.id,a.name,a.description,p.id,p.name FROM ".$db->nameQuote('#__orgraph_dept')
 			." AS a LEFT JOIN ".$db->nameQuote('#__orgraph_dept')
 			." AS p ON a.parent_id=p.id;";
@@ -30,7 +30,7 @@ class TableOrgraphDept extends JTable
 	}
 
 	public function loadDeptTree() {
-		$db=&$this->_db;
+		$db = & JFactory::getDBO();
 		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_dept').";";
 		$db->setQuery($query);
 		foreach($db->loadRowList() as $d){

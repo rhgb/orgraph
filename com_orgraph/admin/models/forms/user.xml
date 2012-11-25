@@ -12,6 +12,7 @@
 		<field name="computer_id" type="text" label="COM_ORGRAPH_USER_LABEL_COMP_ID" />
 		<field name="location" type="text" label="COM_ORGRAPH_USER_LABEL_LOCATION" />
 		<field name="birthday" type="calendar" label="COM_ORGRAPH_USER_LABEL_BIRTHDAY" />
-		<field name="dept_id" type="UserDeptList" label="COM_ORGRAPH_USER_LABEL_DEPT" required="true" />
+		<field name="dept_id" type="userdeptlist" label="COM_ORGRAPH_USER_LABEL_DEPT" required="true" />
+		<field name="proj_ids" type="userprojlist" label="projects" /> 
 	</fieldset>
 </form>

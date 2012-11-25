@@ -8,7 +8,7 @@ class TableOrgraphUser extends JTable
 		parent::__construct('#__orgraph_user', 'id', $db);
 	}
 	public function loadUsers($deptId=null, $userId=null) {
-		$db=&$this->_db;
+		$db = & JFactory::getDBO();
 		if (!empty($deptId)) {
 			$filter=' WHERE a.dept_id='.$db->quote($deptId);
 		} else if (!empty($userId)) {

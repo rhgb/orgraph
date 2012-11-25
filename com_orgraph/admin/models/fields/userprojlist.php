@@ -1,13 +1,13 @@
 <?php
 defined('JPATH_BASE') or die;
 
-JFormHelper::loadFieldClass('list');
+JFormHelper::loadFieldClass('checkboxes');
 
-class JFormFieldUserDeptList extends JFormFieldList
+class JFormFieldUserProjList extends JFormFieldCheckboxes
 {
-	protected $type = 'userdeptlist';
+	protected $type = 'userprojlist';
 
-	public function getTable($type = 'OrgraphDept', $prefix = 'Table', $config = array())
+	public function getTable($type = 'OrgraphProj', $prefix = 'Table', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -25,9 +25,9 @@ class JFormFieldUserDeptList extends JFormFieldList
 		return $list;
 	}
 
-	protected function getDeptTreeList() {
-		$deptTable = $this->getTable();
-		$tree = $deptTable->loadDeptTree();
+	protected function getProjTreeList() {
+		$projTable = $this->getTable();
+		$tree = $projTable->loadProjTree();
 
 		$treelist=array();
 		foreach ($tree as $d) {
@@ -37,7 +37,7 @@ class JFormFieldUserDeptList extends JFormFieldList
 	}
 	protected function getOptions(){
 		$options = array();
-		$treelist = $this->getDeptTreeList();
+		$treelist = $this->getProjTreeList();
 		foreach ($treelist as $d) {
 			$value = '';
 			for ($i=0; $i<$d->level; $i++) {
