@@ -8,13 +8,23 @@ class OrgraphModelMain extends JModelItem
 	}
 	
 	public function getDeptTree() {
-		$deptTable = $this->getTable();
-		return $deptTable->loadDeptTree();
+		$table = $this->getTable();
+		return $table->loadDeptTree();
+	}
+
+	public function getProjTree() {
+		$table = $this->getTable('OrgraphProj');
+		return $table->loadProjTree();
 	}
 	
-	public function getDeptUsers($deptId=null) {
-		$userTable = $this->getTable('OrgraphUser');
-		return $userTable->loadUsers($deptId);
+	public function getDeptUsers($id=null) {
+		$table = $this->getTable('OrgraphUser');
+		return $table->loadUsers($id);
+	}
+
+	public function getProjUsers($id=null) {
+		$table = $this->getTable('OrgraphUser');
+		return $table->loadProjUsers($id);
 	}
 }
 ?>

@@ -4,5 +4,19 @@
 		<message>
 			COM_ORGRAPH_MAIN_LAYOUT_MSG
 		</message>
+		<fields name="request">
+			<fieldset name="request">
+				<field
+					name="series"
+					type="list"
+					label="COM_ORGRAPH_MAIN_LAYOUT_SERIES"
+					description="COM_ORGRAPH_MAIN_LAYOUT_SERIES_DESC"
+					default="dept"
+				>
+					<option value="dept">COM_ORGRAPH_MAIN_LAYOUT_SERIES_DEPT</option>
+					<option value="proj">COM_ORGRAPH_MAIN_LAYOUT_SERIES_PROJ</option>
+				</field>
+			</fieldset>
+		</fields>
 	</layout>
 </metadata>
