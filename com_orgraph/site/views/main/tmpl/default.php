@@ -67,8 +67,8 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 				dept_id:did
 			},function(users){
 				for(var i=0; i<users.length; i++){
-					var $usernode=$('<div class="dept-user-node"><div class="name"></div><div class="position"></div></div>');
-					$usernode.children(".name").text(users[i].name);
+					var $usernode=$('<div class="dept-user-node"><div class="name"><a></a></div><div class="position"></div></div>');
+					$usernode.children(".name").children().attr("href","index.php?option=com_orgraph&view=userdetail&id="+users[i].user_id).text(users[i].name);
 					$usernode.children(".position").text(users[i].position);
 					$("#orgraph_deptUsers").append($usernode);
 				}

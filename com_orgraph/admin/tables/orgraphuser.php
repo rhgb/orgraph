@@ -48,5 +48,29 @@ class TableOrgraphUser extends JTable
 		};
 		return array_map($mapfunc, $db->loadRowList());
 	}
+
+	public function loadUserProj($userId) {
+		if(empty($userId)) return false;
+		$db = & JFactory::getDBO();
+		$query = "SELECT b.id,b.name,b.description,c.id,c.name FROM "
+			.$db->nameQuote('#__orgraph_proj_user')
+			."AS a LEFT JOIN "
+			.$db->nameQuote('#__orgraph_proj')
+			."AS b ON a.proj_id=b.id LEFT JOIN "
+			.$db->nameQuote('#__orgraph_proj')
+			."AS c ON b.parent_id=c.id WHERE a.user_id="
+			.$db->quote($userId);
+		$db->setQuery($query);
+		$mapfunc = function($i) {
+			return (object)array(
+				'id' => $i[0],
+				'name' => $i[1],
+				'description' => $i[2],
+				'parent_id' => $i[3],
+				'parent_name' => $i[4]
+			);
+		};
+		return array_map($mapfunc, $db->loadRowList());
+	}
 }
 ?>

@@ -70,8 +70,10 @@ class OrgraphModelUser extends JModelAdmin {
 
 	public function getItem($pk = null) {
 		$item = parent::getItem($pk);
-		$relationTable = $this->getTable('OrgraphProjUser');
-		$item->proj_ids = $relationTable->getRelation($item->user_id);
+		if(!empty($pk)) {
+			$relationTable = $this->getTable('OrgraphProjUser');
+			$item->proj_ids = $relationTable->getRelation($item->user_id);
+		}
 		return $item;
 	}
 }
