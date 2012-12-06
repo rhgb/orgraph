@@ -69,23 +69,25 @@ class OrgraphModelUser extends JModelAdmin {
 				$avatarPath = JPATH_COMPONENT_SITE . DS . 'files' . DS;
 				$mapfunc = function($i) { return $i['avatar']; };
 				$file = array_map($mapfunc, JRequest::getVar('jform', null, 'files', 'array'));
-				$filename = JFile::makeSafe($file['name']);
-				$src = $file['tmp_name'];
-				$srcext = strtolower(JFile::getExt($filename));
-				if( ($srcext == 'png' || $srcext == 'jpg' || $srcext == 'jpeg') && $file['size'] <= 1048576 ) {
-					$userTable = $this->getTable('OrgraphUser');
-					$origin = $userTable->getAvatar($data['user_id']);
-					if(!empty($origin)) {
-						JFile::delete($avatarPath.$origin);
-					}
-					if (JFile::upload($src, $avatarPath.$filename)) {
-						$userTable->setAvatar($data['user_id'], $filename);
-						$savestate = true;
+				if($file['error'] == 0) {
+					$filename = JFile::makeSafe($file['name']);
+					$src = $file['tmp_name'];
+					$srcext = strtolower(JFile::getExt($filename));
+					if( ($srcext == 'png' || $srcext == 'jpg' || $srcext == 'jpeg') && $file['size'] <= 1048576 ) {
+						$userTable = $this->getTable('OrgraphUser');
+						$origin = $userTable->getAvatar($data['user_id']);
+						if(!empty($origin)) {
+							JFile::delete($avatarPath.$origin);
+						}
+						if (JFile::upload($src, $avatarPath.$filename)) {
+							$userTable->setAvatar($data['user_id'], $filename);
+							$savestate = true;
+						} else {
+							$savestate = false;
+						}
 					} else {
 						$savestate = false;
 					}
-				} else {
-					$savestate = false;
 				}
 			}
 		}

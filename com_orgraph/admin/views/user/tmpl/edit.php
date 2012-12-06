@@ -12,7 +12,7 @@ JHtml::_('behavior.tooltip');
  				echo $field->input;
  				if($field->fieldname == 'avatar' && !empty($this->user->avatar)) {
 					?>
-					<img src="<?php echo JRoute::_('/components/com_orgraph/files/'.$this->user->avatar); ?>" alt="<?php echo JText::_('COM_ORGRAPH_USER_LABEL_AVATAR'); ?>" style="max-width:300px;clear:left;margin-left:140px;" />
+					<img src="<?php echo JURI::root().'components/com_orgraph/files/'.$this->user->avatar; ?>" alt="<?php echo JText::_('COM_ORGRAPH_USER_LABEL_AVATAR'); ?>" style="max-width:300px;clear:left;margin-left:140px;" />
 					<?php 					
  				}
  			?></li>
