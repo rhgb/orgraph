@@ -11,12 +11,54 @@ class TableOrgraphUser extends JTable
 		$db = & JFactory::getDBO();
 		if (!empty($deptId)) {
 			$filter=' WHERE a.dept_id='.$db->quote($deptId);
+			$selector = 'b.id,b.name,a.position,c.name';
+			$mapfunc = function($i){
+				return (object)array(
+					'user_id' => $i[0],
+					'name' => $i[1],
+					'position' => $i[2],
+					'dept' => $i[3],
+				);
+			};
 		} else if (!empty($userId)) {
 			$filter=' WHERE a.user_id='.$db->quote($userId);
+			$selector = 'b.name,a.dept_id,a.position,c.name,a.employee_no,a.supervisor_id,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday';
+			$mapfunc = function($i){
+				return (object)array(
+					'name' => $i[0],
+					'dept_id' => $i[1],
+					'position' => $i[2],
+					'dept' => $i[3],
+					'employee_no' => $i[4],
+					'supervisor_id' => $i[5],
+					'supervisor' => $i[6],
+					'tel' => $i[7],
+					'mobile' => $i[8],
+					'computer_id' => $i[9],
+					'location' => $i[10],
+					'birthday' => $i[11]
+				);
+			};
 		} else {
 			$filter='';
+			$selector = 'a.id,b.name,a.position,c.name,a.employee_no,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday';
+			$mapfunc = function($i){
+				return (object)array(
+					'record_id' => $i[0],
+					'name' => $i[1],
+					'position' => $i[2],
+					'dept' => $i[3],
+					'employee_no' => $i[4],
+					'supervisor' => $i[5],
+					'tel' => $i[6],
+					'mobile' => $i[7],
+					'computer_id' => $i[8],
+					'location' => $i[9],
+					'birthday' => $i[10]
+				);
+			};
 		}
-		$query="SELECT a.id,b.id,b.name,a.dept_id,a.position,c.name,a.employee_no,a.supervisor_id,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday FROM "
+		$query="SELECT ".$selector." FROM "
 		.$db->nameQuote('#__orgraph_user')
 		." AS a LEFT JOIN "
 		.$db->nameQuote('#__users')
@@ -27,24 +69,7 @@ class TableOrgraphUser extends JTable
 		." AS c ON a.dept_id=c.id"
 		.$filter;
 		$db->setQuery($query);
-		$mapfunc = function($i){
-			return (object)array(
-				'record_id' => $i[0],
-				'user_id' => $i[1],
-				'name' => $i[2],
-				'dept_id' => $i[3],
-				'position' => $i[4],
-				'dept' => $i[5],
-				'employee_no' => $i[6],
-				'supervisor_id' => $i[7],
-				'supervisor' => $i[8],
-				'tel' => $i[9],
-				'mobile' => $i[10],
-				'computer_id' => $i[11],
-				'location' => $i[12],
-				'birthday' => $i[13]
-				);
-		};
+
 		return array_map($mapfunc, $db->loadRowList());
 	}
 
@@ -95,6 +120,32 @@ class TableOrgraphUser extends JTable
 				);
 		};
 		return array_map($mapfunc, $db->loadRowList());
+	}
+
+	public function getAvatar($uid) {
+		if(empty($uid))
+			return false;
+		$db = & JFactory::getDBO();
+		$query = & $db->getQuery(true);
+		$query->select('avatar')
+			  ->from('#__orgraph_user')
+			  ->where('user_id='.$uid);
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+
+	public function setAvatar($uid, $avatar) {
+		if(empty($uid))
+			return false;
+		if(empty($avatar))
+			$avatar = '';
+		$db = & JFactory::getDBO();
+		$query = & $db->getQuery(true);
+		$query->update('#__orgraph_user')
+			  ->set('avatar='.$db->quote($avatar))
+			  ->where('user_id='.$uid);
+		$db->setQuery($query);
+		return $db->query() != false;
 	}
 }
 ?>

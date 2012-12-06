@@ -64,13 +64,37 @@ class OrgraphModelUser extends JModelAdmin {
 		if($savestate) {
 			$relationTable = $this->getTable('OrgraphProjUser');
 			$savestate = $relationTable->updateRelation($data['user_id'], $data['proj_ids']);
+			if($savestate) {
+				jimport('joomla.filesystem.file');
+				$avatarPath = JPATH_COMPONENT_SITE . DS . 'files' . DS;
+				$mapfunc = function($i) { return $i['avatar']; };
+				$file = array_map($mapfunc, JRequest::getVar('jform', null, 'files', 'array'));
+				$filename = JFile::makeSafe($file['name']);
+				$src = $file['tmp_name'];
+				$srcext = strtolower(JFile::getExt($filename));
+				if( ($srcext == 'png' || $srcext == 'jpg' || $srcext == 'jpeg') && $file['size'] <= 1048576 ) {
+					$userTable = $this->getTable('OrgraphUser');
+					$origin = $userTable->getAvatar($data['user_id']);
+					if(!empty($origin)) {
+						JFile::delete($avatarPath.$origin);
+					}
+					if (JFile::upload($src, $avatarPath.$filename)) {
+						$userTable->setAvatar($data['user_id'], $filename);
+						$savestate = true;
+					} else {
+						$savestate = false;
+					}
+				} else {
+					$savestate = false;
+				}
+			}
 		}
 		return $savestate;
 	}
 
 	public function getItem($pk = null) {
 		$item = parent::getItem($pk);
-		if(!empty($pk)) {
+		if(!empty($item->id)) {
 			$relationTable = $this->getTable('OrgraphProjUser');
 			$item->proj_ids = $relationTable->getRelation($item->user_id);
 		}

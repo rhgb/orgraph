@@ -3,6 +3,7 @@
 	<fieldset>
 		<field name="id" type="hidden"/>
 		<field name="user_id" type="user" label="COM_ORGRAPH_USER_LABEL_NAME" required="true" />
+		<field name="avatar" type="file" label="COM_ORGRAPH_USER_LABEL_AVATAR" accept="image/*"/>
 		<field name="position" type="text" label="COM_ORGRAPH_USER_LABEL_POS" />
 		<field name="dept_id" type="hidden" />
 		<field name="employee_no" type="text" label="COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO" required="true" />
