@@ -33,6 +33,9 @@ class TableOrgraphDept extends JTable
 		$db = & JFactory::getDBO();
 		$query="SELECT id,name,description,parent_id FROM ".$db->nameQuote('#__orgraph_dept').";";
 		$db->setQuery($query);
+		$list = array();
+		$rootlist = array();
+		$treelist = array();
 		foreach($db->loadRowList() as $d){
 			$list[$d[0]]=$d;
 		}

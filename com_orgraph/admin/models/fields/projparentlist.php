@@ -12,7 +12,7 @@ class JFormFieldProjParentList extends JFormFieldList
 		return JTable::getInstance($type, $prefix, $config);
 	}
 	
-	function expandTree($node, $level) {
+	protected function expandTree($node, $level) {
 		$node->level=$level;
 		$chlist=$node->children;
 		unset($node->children);
@@ -30,7 +30,7 @@ class JFormFieldProjParentList extends JFormFieldList
 	protected function getProjTreeList() {
 		$projTable = $this->getTable();
 		$tree = $projTable->loadProjTree();
-		$treelist=array( (object)array('id'=>0, 'name'=>JText::_('COM_ORGRAPH_PLACEHOLDER_NONE')) );
+		$treelist=array( (object)array('id'=>0, 'name'=>JText::_('COM_ORGRAPH_PLACEHOLDER_NONE'), 'level'=>0) );
 		foreach ($tree as $d) {
 			if($this->currentId != $d->id) {
 				$treelist = array_merge($treelist, $this->expandTree($d, 0));
@@ -39,7 +39,7 @@ class JFormFieldProjParentList extends JFormFieldList
 		return $treelist;
 	}
 
-	protected function getOptions(){
+	protected function getOptions() {
 		$this->currentId = $this->form->getValue('id');
 		$options = array();
 		$treelist = $this->getProjTreeList();
