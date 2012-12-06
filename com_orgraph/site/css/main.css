@@ -98,6 +98,15 @@
 	text-align: center;
 	margin-bottom: 5px;
 }
+.user-node .avatar {
+	background-color: #FFF;
+	max-height: 100px;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+.user-node .avatar img {
+	width: 75px;
+}
 .user-node .position {
 	text-align: center;
 	margin-bottom: 5px;

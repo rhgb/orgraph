@@ -4,6 +4,11 @@ JHTML::stylesheet('userdetail.css','components/com_orgraph/css/');
 ?>
 <h1><?php echo $this->user->name; ?></h1>
 <div class="detail">
+	<?php if(!empty($this->user->avatar)) : ?>
+		<div class="avatar">
+			<img src="<?php echo JRoute::_('/components/com_orgraph/files/'.$this->user->avatar); ?>" alt="<?php echo JText::_('COM_ORGRAPH_USER_AVATAR'); ?>">
+		</div>
+	<?php endif; ?>
 	<table class="user-detail">
 		<col class="desc" />
 		<col class="content" />

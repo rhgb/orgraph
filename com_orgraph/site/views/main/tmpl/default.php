@@ -37,8 +37,15 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 				id:did
 			},function(users){
 				for(var i=0; i<users.length; i++){
-					var $usernode=$('<div class="user-node"><div class="name"><a></a></div><div class="position"></div><div class="dept"></div></div>');
+					var $usernode=$('<div class="user-node"><div class="avatar"></div><div class="name"><a></a></div><div class="position"></div><div class="dept"></div></div>');
 					$usernode.children(".name").children().attr("href","index.php?option=com_orgraph&view=userdetail&id="+users[i].user_id).text(users[i].name);
+					if(typeof(users[i].avatar) == "string" && users[i].avatar.length > 0) {
+						$img = $("<a><img /></a>");
+						$img.attr("href","index.php?option=com_orgraph&view=userdetail&id="+users[i].user_id);
+						$img.children().attr("src","/components/com_orgraph/files/"+users[i].avatar);
+						$img.children().attr("alt","<?php echo JText::_('COM_ORGRAPH_USER_AVATAR'); ?>");
+						$usernode.children(".avatar").append($img);
+					}
 					$usernode.children(".position").text(users[i].position);
 					$usernode.children(".dept").text(users[i].dept);
 					$("#orgraph_users_container").append($usernode);

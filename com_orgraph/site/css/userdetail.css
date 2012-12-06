@@ -3,6 +3,13 @@ div.detail {
 	float: left;
 	width: 40%;
 }
+div.avatar {
+	margin: 5px 15px;
+}
+div.avatar img {
+	max-width: 200px;
+	max-height: 266px;
+}
 table.user-detail {
 	border: 0 none;
 	border-collapse: separate;

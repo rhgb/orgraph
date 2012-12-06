@@ -11,32 +11,34 @@ class TableOrgraphUser extends JTable
 		$db = & JFactory::getDBO();
 		if (!empty($deptId)) {
 			$filter=' WHERE a.dept_id='.$db->quote($deptId);
-			$selector = 'b.id,b.name,a.position,c.name';
+			$selector = 'b.id,b.name,a.avatar,a.position,c.name';
 			$mapfunc = function($i){
 				return (object)array(
 					'user_id' => $i[0],
 					'name' => $i[1],
-					'position' => $i[2],
-					'dept' => $i[3],
+					'avatar' => $i[2],
+					'position' => $i[3],
+					'dept' => $i[4],
 				);
 			};
 		} else if (!empty($userId)) {
 			$filter=' WHERE a.user_id='.$db->quote($userId);
-			$selector = 'b.name,a.dept_id,a.position,c.name,a.employee_no,a.supervisor_id,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday';
+			$selector = 'b.name,a.avatar,a.dept_id,a.position,c.name,a.employee_no,a.supervisor_id,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday';
 			$mapfunc = function($i){
 				return (object)array(
 					'name' => $i[0],
-					'dept_id' => $i[1],
-					'position' => $i[2],
-					'dept' => $i[3],
-					'employee_no' => $i[4],
-					'supervisor_id' => $i[5],
-					'supervisor' => $i[6],
-					'tel' => $i[7],
-					'mobile' => $i[8],
-					'computer_id' => $i[9],
-					'location' => $i[10],
-					'birthday' => $i[11]
+					'avatar' => $i[1],
+					'dept_id' => $i[2],
+					'position' => $i[3],
+					'dept' => $i[4],
+					'employee_no' => $i[5],
+					'supervisor_id' => $i[6],
+					'supervisor' => $i[7],
+					'tel' => $i[8],
+					'mobile' => $i[9],
+					'computer_id' => $i[10],
+					'location' => $i[11],
+					'birthday' => $i[12]
 				);
 			};
 		} else {
@@ -100,7 +102,7 @@ class TableOrgraphUser extends JTable
 	public function loadProjUsers($pid) {
 		if(empty($pid)) return false;
 		$db = & JFactory::getDBO();
-		$query="SELECT c.id,c.name,b.position,d.name FROM "
+		$query="SELECT c.id,c.name,a.avatar,b.position,d.name FROM "
 		.$db->nameQuote('#__orgraph_proj_user')
 		." AS a LEFT JOIN "
 		.$db->nameQuote('#__orgraph_user')
@@ -115,8 +117,9 @@ class TableOrgraphUser extends JTable
 			return (object)array(
 				'user_id' => $i[0],
 				'name' => $i[1],
-				'position' => $i[2],
-				'dept' => $i[3]
+				'avatar' => $i[2],
+				'position' => $i[3],
+				'dept' => $i[4]
 				);
 		};
 		return array_map($mapfunc, $db->loadRowList());
