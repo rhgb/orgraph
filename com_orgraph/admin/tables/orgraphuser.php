@@ -102,7 +102,7 @@ class TableOrgraphUser extends JTable
 	public function loadProjUsers($pid) {
 		if(empty($pid)) return false;
 		$db = & JFactory::getDBO();
-		$query="SELECT c.id,c.name,a.avatar,b.position,d.name FROM "
+		$query="SELECT c.id,c.name,b.avatar,b.position,d.name FROM "
 		.$db->nameQuote('#__orgraph_proj_user')
 		." AS a LEFT JOIN "
 		.$db->nameQuote('#__orgraph_user')
