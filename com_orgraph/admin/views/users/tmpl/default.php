@@ -9,6 +9,9 @@ JHTML::_('behavior.tooltip');
 				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this);" />
 				</th>
+				<th width="1%">
+					&equiv;
+				</th>
 				<th class="left nowrap">
 					<?php echo JText::_('COM_ORGRAPH_USER_LABEL_NAME'); ?>
 				</th>
@@ -49,6 +52,9 @@ JHTML::_('behavior.tooltip');
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
 					<?php echo JHtml::_('grid.id', $i, $user->record_id); ?>
+				</td>
+				<td class="center">
+					<?php echo $user->level; ?>
 				</td>
 				<td>
 					<a href="<?php echo $link; ?>"><?php echo $user->name; ?></a>

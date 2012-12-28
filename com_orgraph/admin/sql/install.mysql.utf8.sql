@@ -36,6 +36,7 @@ create table `#__orgraph_user` (
 	user_id int not null unique,
 	employee_no varchar(16) not null unique,
 	position varchar(255) not null,
+	level int null,
 	supervisor_id int null,
 	tel varchar(16) null,
 	mobile varchar(16) null,

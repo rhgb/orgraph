@@ -7,7 +7,7 @@
 	<authorEmail>admin@localhost</authorEmail>
 	<authorUrl>localhost</authorUrl>
 	<license>CC-BY-SA 3.0</license>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<description>COM_ORGRAPH_DESC</description>
 	
 	<install>

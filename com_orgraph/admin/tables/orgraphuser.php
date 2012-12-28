@@ -8,10 +8,16 @@ class TableOrgraphUser extends JTable
 		parent::__construct('#__orgraph_user', 'id', $db);
 	}
 	public function loadUsers($deptId=null, $userId=null) {
+		/*
+		USED BY:
+		loadUsers(): 
+		loadUsers($deptId): site->main->list dept users
+		loadUsers($deptId, $userId): 
+		 */
 		$db = & JFactory::getDBO();
 		if (!empty($deptId)) {
 			$filter=' WHERE a.dept_id='.$db->quote($deptId);
-			$selector = 'b.id,b.name,a.avatar,a.position,c.name';
+			$selector = 'b.id,b.name,a.avatar,a.position,c.name,a.level';
 			$mapfunc = function($i){
 				return (object)array(
 					'user_id' => $i[0],
@@ -19,6 +25,7 @@ class TableOrgraphUser extends JTable
 					'avatar' => $i[2],
 					'position' => $i[3],
 					'dept' => $i[4],
+					'level' => $i[5]
 				);
 			};
 		} else if (!empty($userId)) {
@@ -43,7 +50,7 @@ class TableOrgraphUser extends JTable
 			};
 		} else {
 			$filter='';
-			$selector = 'a.id,b.name,a.position,c.name,a.employee_no,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday';
+			$selector = 'a.id,b.name,a.position,c.name,a.employee_no,d.name,a.tel,a.mobile,a.computer_id,a.location,a.birthday,a.level';
 			$mapfunc = function($i){
 				return (object)array(
 					'record_id' => $i[0],
@@ -56,7 +63,8 @@ class TableOrgraphUser extends JTable
 					'mobile' => $i[7],
 					'computer_id' => $i[8],
 					'location' => $i[9],
-					'birthday' => $i[10]
+					'birthday' => $i[10],
+					'level' => $i[11]
 				);
 			};
 		}
@@ -100,9 +108,13 @@ class TableOrgraphUser extends JTable
 	}
 
 	public function loadProjUsers($pid) {
+		/*
+		USED BY:
+			site->main->list proj users
+		 */
 		if(empty($pid)) return false;
 		$db = & JFactory::getDBO();
-		$query="SELECT c.id,c.name,b.avatar,b.position,d.name FROM "
+		$query="SELECT c.id,c.name,b.avatar,b.position,d.name,b.level FROM "
 		.$db->nameQuote('#__orgraph_proj_user')
 		." AS a LEFT JOIN "
 		.$db->nameQuote('#__orgraph_user')
@@ -119,7 +131,8 @@ class TableOrgraphUser extends JTable
 				'name' => $i[1],
 				'avatar' => $i[2],
 				'position' => $i[3],
-				'dept' => $i[4]
+				'dept' => $i[4],
+				'level' => $i[5]
 				);
 		};
 		return array_map($mapfunc, $db->loadRowList());
