@@ -64,7 +64,8 @@
 	padding: 5px;
 }
 #orgraph_tree_container .tree-connect {
-	border-bottom: 1px solid black;
+	height: 1px;
+	background-color: black;
 }
 #orgraph_tree_container .tree-connect-hr {
 	width: 1px;

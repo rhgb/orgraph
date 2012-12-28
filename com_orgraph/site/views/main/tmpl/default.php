@@ -2,6 +2,28 @@
 defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('main.css','components/com_orgraph/css/');
  ?>
+<!--[if lte IE 7]>
+<script type="text/javascript">
+(function($){
+	$(function(){
+		function updateWidth($tn) {
+			var $children = $tn.children('.children').children('.tree-node');
+			var nwidth = 0;
+			if ($children.length) {
+				for (var i = 0; i < $children.length; i++) {
+					nwidth += updateWidth($children.eq(i));
+				}
+			} else {
+				nwidth = 102;
+			}
+			$tn.width(nwidth);
+			return nwidth+10;
+		}
+		updateWidth($('#orgraph_tree_container>.tree-node'));
+	});
+})(jQuery);
+</script>
+<![endif]-->
 <script type="text/javascript">
 (function($){
 	$(function(){
@@ -55,6 +77,7 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 	});
 })(jQuery);
 </script>
+
 <div class="container">
 	<h1><?php echo JText::_('COM_ORGRAPH_GRAPH'); ?></h1>
 	<div id="orgraph_tree_container" class="<?php echo $this->series; ?>">
