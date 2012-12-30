@@ -40,15 +40,12 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 		$("#orgraph_tree_container").on("click",".tree-node>.node-detail:not(.selected)",function(e){
 			// highlight selected
 			$(".node-detail.selected").removeClass("selected");
-			$detail=$(this);
+			var $detail=$(this);
 			$detail.addClass("selected");
 			// display basic info
-			$rpanel=$("#orgraph_users_container").empty();
-			$title=$('<h3 class="node-name"></h3>');
-			$title.text($detail.find(".name").text());
-			$desc=$('<div class="node-desc"></div>');
-			$desc.text($detail.find(".desc").text());
-			$rpanel.append($title).append($desc);
+			var $tbody = $("#orgraph_users_container .user-table>tbody").empty();
+			$('#orgraph_users_container .node-name').text($detail.find(".name").text());
+			$('#orgraph_users_container .node-desc').text($detail.find(".desc").text());
 			// get members
 			var $node=$(this).parent();
 			var did=$node.attr("id").match(/\d+/)[0];
@@ -61,25 +58,15 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 				users.sort(function(a,b){
 					return Number(b.level) - Number(a.level);
 				});
-				var startlevel = users[0].level;
-				for(var i=0; i<users.length; i++){
-					$i = users[i];
-					var $usernode=$('<div class="user-node"><div class="avatar"></div><div class="name"><a></a></div><div class="position"></div><div class="dept"></div></div>');
-					$usernode.children(".name").children().attr("href","index.php?option=com_orgraph&view=userdetail&id="+$i.user_id).text($i.name);
-					if(typeof($i.avatar) == "string" && $i.avatar.length > 0) {
-						$img = $("<a><img /></a>");
-						$img.attr("href","index.php?option=com_orgraph&view=userdetail&id="+$i.user_id);
-						$img.children().attr("src","<?php echo JURI::root() ?>components/com_orgraph/files/"+$i.avatar);
-						$img.children().attr("alt","<?php echo JText::_('COM_ORGRAPH_USER_AVATAR'); ?>");
-						$usernode.children(".avatar").append($img);
-					}
-					$usernode.children(".position").text($i.position);
-					$usernode.children(".dept").text($i.dept);
-					if($i.level != startlevel) {
-						$("#orgraph_users_container").append('<div class="user-level-hr"></div>');
-						startlevel = $i.level;
-					}
-					$("#orgraph_users_container").append($usernode);
+				var $rowtemp = $('<tr><td class="name"><a></a></td><td class="position"></td><td class="dept"></td></tr>');
+				for(var i=0; i<users.length; i++) {
+					var $i = users[i];
+					var $row = $rowtemp.clone();
+					$row.addClass('l'+$i.level);
+					$row.find(".name>a").attr("href","index.php?option=com_orgraph&view=userdetail&id="+$i.user_id).text($i.name);
+					$row.children(".position").text($i.position);
+					$row.children(".dept").text($i.dept);
+					$tbody.append($row);
 				}
 			});
 		});
@@ -118,6 +105,15 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 		}
 		?>
 	</div>
-	<div id="orgraph_users_container" class="<?php echo $this->series; ?>"></div>
+	<div id="orgraph_users_container" class="<?php echo $this->series; ?>">
+		<h3 class="node-name"></h3>
+		<div class="node-desc"></div>
+		<table class="user-table">
+			<col class="name" />
+			<col class="position" />
+			<col class="dept" />
+			<tbody></tbody>
+		</table>
+	</div>
 	<div style="clear:both"></div>
 </div>

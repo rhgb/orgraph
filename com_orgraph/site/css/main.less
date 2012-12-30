@@ -1,0 +1,170 @@
+#orgraph_tree_container {
+	float: left;
+	.tree-node {
+		float: left;
+		padding: 0 5px;
+	}
+	.node-detail {
+		margin: 0 auto;
+		width: 100px;
+		cursor: pointer;
+	}
+	.node-detail .name {
+		padding: 3px;
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+	}
+	/** default(dept) color set **/
+	.node-detail {
+		border: 1px solid #069;
+		.name {
+			background: #069;
+		}
+		.desc {
+			padding: 5px;
+		}
+		&:hover,
+		&:active {
+			border-color: #5297ba;
+		}
+		&.selected {
+			border-color: #36aa00;
+		}
+		&:hover .name,
+		&:active .name {
+			background-color:#5297ba;
+		}
+		&.selected .name {
+			background-color:#36aa00;
+		}
+	}
+	/** proj color set **/
+	&.proj .node-detail {
+		border: 1px solid #6C7E91;
+		.name {
+			background: #6C7E91;
+		}
+		&:hover,
+		&:active {
+			border-color: #3f6791;
+		}
+		&:hover .name,
+		&:active .name {
+			background-color:#3f6791;
+		}
+		&.selected {
+			border-color: #36aa00;
+		}
+		&.selected .name {
+			background-color:#36aa00;
+		}
+	}
+	/**  **/
+	.tree-connect {
+		height: 1px;
+		background-color: black;
+	}
+	.tree-connect-hr {
+		width: 1px;
+		height: 10px;
+		margin: 0 auto;
+		background-color: black;
+	}
+}
+#orgraph_users_container {
+	overflow: hidden;
+	border-left: 1px solid #CCC;
+	padding-left: 10px;
+	.user-table {
+		width: 100%;
+		margin-top: 10px;
+		border: 0 none;
+		border-top: 1px solid #ccc;
+		table-layout: fixed;
+		tr {
+			border: 0 none;
+			height: 30px;
+		}
+		td {
+			border-style: solid;
+			border-color: #ccc;
+			border-width: 0 0 1px;
+			&.name {
+				padding-left: 10px;
+				padding-right: 5px;
+				a {
+					text-decoration: none;
+					&:hover,
+					&:focus,
+					&:active {
+						text-decoration: underline;
+						background-color: transparent;
+					}
+				}
+			}
+			&.position {
+				text-align: center;
+			}
+			&.dept {
+				text-align: right;
+				padding-left: 5px;
+				padding-right: 10px;
+			}
+		}
+		tr.l9,tr.l8,tr.l7,tr.l6,tr.l5 {
+			color: #e6ebf0;
+			a {
+				color: #fff;
+			}
+		}
+		tr.lnull,tr.l0,tr.l1,tr.l2,tr.l3,tr.l4 {
+			color: #666;
+			a {
+				color: #095197;
+			}
+		}
+		tr.l9 {
+			background-color: #073767;
+		}
+		tr.l8 {
+			background-color: #204b76;
+		}
+		tr.l7 {
+			background-color: #395f85;
+		}
+		tr.l6 {
+			background-color: #527394;
+		}
+		tr.l5 {
+			background-color: #6a87a4;
+		}
+		tr.l4 {
+			background-color: #9cafc2;
+			td {
+				border-color: #ddd;
+			}
+		}
+		tr.l3 {
+			background-color: #b5c3d1;
+			td {
+				border-color: #eee;
+			}
+		}
+		tr.l2 {
+			background-color: #cdd7e1;
+			td {
+				border-color: #fff;
+			}
+		}
+		tr.l1 {
+			background-color: #e6ebf0;
+			td {
+				border-color: #bbb;
+			}
+		}
+		tr.l0 {
+			background-color: #ffffff;
+		}
+	}
+}

@@ -5,7 +5,7 @@
 		<field name="user_id" type="user" label="COM_ORGRAPH_USER_LABEL_NAME" required="true" />
 		<field name="avatar" type="file" label="COM_ORGRAPH_USER_LABEL_AVATAR" accept="image/*"/>
 		<field name="position" type="text" label="COM_ORGRAPH_USER_LABEL_POS" />
-		<field name="level" type="integer" first="0" last="10" step="1" label="COM_ORGRAPH_USER_LABEL_LEVEL" description="COM_ORGRAPH_USER_DESC_LEVEL"/>
+		<field name="level" type="integer" first="0" last="9" step="1" label="COM_ORGRAPH_USER_LABEL_LEVEL" description="COM_ORGRAPH_USER_DESC_LEVEL"/>
 		<field name="dept_id" type="hidden" />
 		<field name="employee_no" type="text" label="COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO" required="true" />
 		<field name="supervisor_id" type="user" label="COM_ORGRAPH_USER_LABEL_SUPERVISOR" />
