@@ -44,6 +44,11 @@ JHTML::_('behavior.tooltip');
 				</th>
 			</tr>
 		</thead>
+		<tfoot>
+			<tr><td colspan="12">
+				<?php echo $this->pagination->getListFooter(); ?>
+			</td></tr>
+		</tfoot>
 		<tbody>
 		<?php 
 		foreach ($this->users as $i => $user) {

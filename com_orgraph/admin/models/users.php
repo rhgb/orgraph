@@ -24,13 +24,18 @@ class OrgraphModelUsers extends JModelList {
 		parent::__construct($config);
 	}
 
+	protected function getListQuery() {
+		$userTable = $this->getTable();
+		return $userTable->getUsersQuery(null, null, $this->getState('list.ordering', 'b.name'), $this->getState('list.direction', 'ASC'));
+	}
+
+	public function getMappingFunction() {
+		return $this->mapfunc;
+	}
+
 	public function getTable($type = 'OrgraphUser', $prefix = 'Table', $config = array()) 
 	{
 		return JTable::getInstance($type, $prefix, $config);
-	}
-	public function getUserList(){
-		$userTable=$this->getTable();
-		return $userTable->loadUsers(null, null, $this->getState('list.ordering', 'b.name'), $this->getState('list.direction', 'ASC'));
 	}
 }
  ?>
