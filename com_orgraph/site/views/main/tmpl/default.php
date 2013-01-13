@@ -56,14 +56,28 @@ JHTML::stylesheet('main.css','components/com_orgraph/css/');
 				id:did
 			},function(users) {
 				users.sort(function(a,b){
-					return Number(b.level) - Number(a.level);
+					if (a.level == b.level) {
+						if (b.position > a.position)
+							return 1;
+						else if (b.position < a.position)
+							return -1;
+						else
+							return 0;
+					} else {
+						return Number(b.level) - Number(a.level);
+					}
 				});
 				var $rowtemp = $('<tr><td class="name"><a></a></td><td class="position"></td><td class="dept"></td></tr>');
+				$itemid = document.location.search.match(/\bItemid=[0-9]+/);
+				if($itemid == null)
+					$itemid = "";
+				else
+					$itemid = "&" + $itemid[0];
 				for(var i=0; i<users.length; i++) {
 					var $i = users[i];
 					var $row = $rowtemp.clone();
 					$row.addClass('l'+$i.level);
-					$row.find(".name>a").attr("href","index.php?option=com_orgraph&view=userdetail&id="+$i.user_id).text($i.name);
+					$row.find(".name>a").attr("href","index.php?option=com_orgraph&view=userdetail&id="+$i.user_id+$itemid).text($i.name);
 					$row.children(".position").text($i.position);
 					$row.children(".dept").text($i.dept);
 					$tbody.append($row);

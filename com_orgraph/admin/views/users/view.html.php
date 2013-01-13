@@ -7,6 +7,10 @@ class OrgraphViewUsers extends JView
 	protected $sortColumn;
 	function display($tpl = null) {
 		$this->users = $this->get('UserList');
+		$this->state = $this->get('State');
+
+		$this->sortDirection = $this->state->get('list.direction');
+		$this->sortColumn = $this->state->get('list.ordering');
 		assert($this->users != null);
 		if(count($errors = $this->get('Errors')))
 		{
