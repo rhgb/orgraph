@@ -35,7 +35,7 @@ class JFormFieldUserDeptList extends JFormFieldList
 		}
 		return $treelist;
 	}
-	protected function getOptions(){
+	public function getOptions(){
 		$options = array();
 		$treelist = $this->getDeptTreeList();
 		foreach ($treelist as $d) {

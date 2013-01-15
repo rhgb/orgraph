@@ -2,7 +2,7 @@
 defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('main.css','components/com_orgraph/css/');
  ?>
-<!--[if lte IE 7]>
+<!--[if lte IE 8]>
 <script type="text/javascript">
 (function($){
 	$(function(){

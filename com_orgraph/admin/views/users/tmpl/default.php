@@ -1,8 +1,28 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
 JHTML::_('behavior.tooltip');
+JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+$deptField = JFormHelper::loadFieldType('userdeptlist', false);
+$depts = $deptField->getOptions();
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_orgraph&view=users'); ?>" method="post" name="adminForm" id="adminForm">
+	<fieldset id="filter-bar">
+		<div class="filter-search fltlft">
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_ORGRAPH_USER_FILTER_NAME'); ?>" />
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+		</div>
+		<div class="filter-select fltrt">
+			<select name="filter_deptId" class="inputbox" onchange="this.form.submit()">
+				<option value=""> - <?php echo JText::_('COM_ORGRAPH_USER_FILTER_DEPT') ?> - </option>
+				<?php echo JHtml::_('select.options', $depts, 'value', 'text', $this->state->get('filter.deptId'));?>
+			</select>
+
+		</div>
+		<div class="clr"></div>
+	</fieldset>
+
 	<table class="adminlist">
 		<thead>
 			<tr class="sortable">
@@ -10,37 +30,37 @@ JHTML::_('behavior.tooltip');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this);" />
 				</th>
 				<th width="1%">
-					<?php echo JHTML::_('grid.sort', '&equiv;', 'a.level', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', '&equiv;', 'level', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="left nowrap">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_NAME', 'b.name', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_NAME', 'name', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_POS', 'a.position', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_POS', 'position', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_DEPT', 'c.name', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_DEPT', 'dept', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO', 'a.employee_no', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_EMPLOYEE_NO', 'employee_no', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_SUPERVISOR', 'd.name', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_SUPERVISOR', 'supervisor', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_TEL', 'a.tel', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_TEL', 'tel', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_MOBILE', 'a.mobile', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_MOBILE', 'mobile', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_COMP_ID', 'a.computer_id', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_COMP_ID', 'computer_id', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="5%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_LOCATION', 'a.location', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_LOCATION', 'location', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_BIRTHDAY', 'a.birthday', $this->sortDirection, $this->sortColumn); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_ORGRAPH_USER_LABEL_BIRTHDAY', 'birthday', $this->sortDirection, $this->sortColumn); ?>
 				</th>
 			</tr>
 		</thead>

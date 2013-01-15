@@ -8,7 +8,7 @@ class TableOrgraphUser extends JTable
 		parent::__construct('#__orgraph_user', 'id', $db);
 	}
 
-	public function getUsersQuery($deptId=null, $userId=null, $order=null, $dir=null) {
+	public function getUsersQuery($deptId=null, $userId=null) {
 		$db = & JFactory::getDBO();
 		if (!empty($deptId)) {
 			$filter='a.dept_id='.$db->quote($deptId);
@@ -67,13 +67,10 @@ class TableOrgraphUser extends JTable
 			$query->where($filter);
 		}
 
-		if ($order != null) {
-			$query->order($db->escape($order).' '.$db->escape($dir));
-		}
 		return $query;
 	}
 
-	public function loadUsers($deptId=null, $userId=null, $order=null, $dir=null) {
+	public function loadUsers($deptId=null, $userId=null) {
 		/*
 		USED BY:
 		loadUsers(null, null, $order, $dir):  admin->view->users
@@ -81,7 +78,7 @@ class TableOrgraphUser extends JTable
 		loadUsers(null, $userId): site->user
 		 */
 		$db = & JFactory::getDBO();
-		$query = $this->getUsersQuery($deptId, $userId, $order, $dir);
+		$query = $this->getUsersQuery($deptId, $userId);
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

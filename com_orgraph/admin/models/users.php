@@ -7,30 +7,53 @@ class OrgraphModelUsers extends JModelList {
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
-				'a.level',
-				'b.name',
-				'a.position',
-				'c.name',
-				'a.employee_no',
-				'd.name',
-				'a.tel',
-				'a.mobile',
-				'a.computer_id',
-				'a.location',
-				'a.birthday'
+				'level',
+				'name',
+				'position',
+				'dept',
+				'employee_no',
+				'supervisor',
+				'tel',
+				'mobile',
+				'computer_id',
+				'location',
+				'birthday'
 				);
 		}
 
 		parent::__construct($config);
 	}
 
-	protected function getListQuery() {
-		$userTable = $this->getTable();
-		return $userTable->getUsersQuery(null, null, $this->getState('list.ordering', 'b.name'), $this->getState('list.direction', 'ASC'));
+	protected function populateState($ordering = null, $direction = null) {
+		$app = JFactory::getApplication();
+		$context = $this->context;
+		$search = $this->getUserStateFromRequest($context.'.search', 'filter_search');
+		$this->setState('filter.search', $search);
+		$deptId = $this->getUserStateFromRequest($context.'.deptId', 'filter_deptId');
+		$this->setState('filter.deptId', $deptId);
+
+		parent::populateState($ordering, $direction);
 	}
 
-	public function getMappingFunction() {
-		return $this->mapfunc;
+	protected function getListQuery() {
+		$db = & JFactory::getDBO();
+		$userTable = $this->getTable();
+		$query = $userTable->getUsersQuery();
+		// search filter
+		$search = $this->getState('filter.search');
+		if (!empty($search)) {
+			$search = $db->quote('%'.$db->escape($search, true).'%');
+			$query->where('b.name LIKE '.$search);
+		}
+		// department filter
+		$deptId = $db->escape($this->getState('filter.deptId'));
+		if (is_numeric($deptId)) {
+			$query->where('a.dept_id='.(int)$deptId);
+		}
+		// ordering
+		$query->order($db->escape($this->getState('list.ordering', 'name')).' '.$db->escape($this->getState('list.direction', 'ASC')));
+
+		return $query;
 	}
 
 	public function getTable($type = 'OrgraphUser', $prefix = 'Table', $config = array()) 
